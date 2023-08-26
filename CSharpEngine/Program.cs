@@ -1,3 +1,3 @@
 ﻿
-using var game = new CSharpEngine.Game();
+using var game = new CSharpEngine.Engine();
 game.Run();

@@ -4,14 +4,16 @@ using Microsoft.Xna.Framework.Input;
 
 namespace CSharpEngine
 {
-    public class Game : Microsoft.Xna.Framework.Game
+    public class Engine : Microsoft.Xna.Framework.Game
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
+        private Game _game;
 
-        public Game()
+        public Engine()
         {
             _graphics = new GraphicsDeviceManager(this);
+            _game = new Game();
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
         }
@@ -19,14 +21,13 @@ namespace CSharpEngine
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-
+            _game.Init();
             // TODO: use this.Content to load your game content here
         }
 
@@ -39,15 +40,16 @@ namespace CSharpEngine
             }
             
             // TODO: Add your update logic here
+            _game.Update(gameTime);
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(_game.BackgroundColor);
 
             // TODO: Add your drawing code here
-
+            _game.Draw();
             base.Draw(gameTime);
         }
     }
