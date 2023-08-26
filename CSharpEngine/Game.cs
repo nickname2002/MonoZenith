@@ -1,49 +1,24 @@
-using System;
 using Microsoft.Xna.Framework;
+
 namespace CSharpEngine;
 
-public class Game
+public partial class Game
 {
-    private Color _backgroundColor;
-    public Color BackgroundColor => this._backgroundColor;
-
-    public Game()
-    {
-        this._backgroundColor = new Color(0, 0, 0);
-    }
-    
-    public void SetBackgroundColor(Color c)
-    {
-        this._backgroundColor = c;
-    }
-    
-    public void LoadImage()
-    {
-        throw new NotImplementedException();
-    }
-    
-    public void DrawImage()
-    {
-        throw new NotImplementedException();
-    }
-    
-    public void DrawRectangle()
-    {
-        throw new NotImplementedException();
-    }
-    
+    /* Initialize game vars and load assets. */
     public void Init()
     {
-        Console.WriteLine("Initializing");
+
     }
-    
+
+    /* Update game logic. */
     public void Update(GameTime deltaTime)
     {
-        Console.WriteLine("Updating");
+
     }
     
+    /* Draw objects. */
     public void Draw()
     {
-        Console.WriteLine("Drawing");
+
     }
 }
