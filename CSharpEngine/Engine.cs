@@ -28,6 +28,11 @@ namespace CSharpEngine
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             _game.Init();
+
+            _graphics.IsFullScreen = false;
+            _graphics.PreferredBackBufferWidth = _game.ScreenWidth;
+            _graphics.PreferredBackBufferHeight = _game.ScreenHeight;
+            _graphics.ApplyChanges();
             // TODO: use this.Content to load your game content here
         }
 

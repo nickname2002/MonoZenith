@@ -1,5 +1,4 @@
 using Microsoft.Xna.Framework;
-
 namespace CSharpEngine;
 
 public partial class Game
@@ -7,7 +6,7 @@ public partial class Game
     /* Initialize game vars and load assets. */
     public void Init()
     {
-
+        
     }
 
     /* Update game logic. */
