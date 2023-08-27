@@ -65,10 +65,11 @@ public partial class Game
         return _content.Load<SpriteFont>($"Fonts/{font}");
     }
 
-    public void DrawText(string content, Vector2 pos, SpriteFont font, Color c)
+    public void DrawText(string content, Vector2 pos, SpriteFont font, Color c, float scale=1, float angle=0)
     {
         Vector2 origin = font.MeasureString(content) / 2;
-        _spriteBatch.DrawString(font, content, pos, c, 0, origin, 1.0f, SpriteEffects.None, 0);
+        float rotationAngle = MathHelper.ToRadians(angle);
+        _spriteBatch.DrawString(font, content, pos, c, rotationAngle, origin, scale, SpriteEffects.None, 0);
     }
 
     /* Source: https://community.monogame.net/t/loading-png-jpg-etc-directly/7403 */
