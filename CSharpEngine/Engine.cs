@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.IO;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -13,27 +14,27 @@ namespace CSharpEngine
         public Engine()
         {
             _graphics = new GraphicsDeviceManager(this);
-            _game = new Game(_spriteBatch);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
         }
 
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
+            _spriteBatch = new SpriteBatch(GraphicsDevice);
+            _game = new Game(_spriteBatch, _graphics);
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
-            _spriteBatch = new SpriteBatch(GraphicsDevice);
             _game.Init();
 
+            // Change window properties
             _graphics.IsFullScreen = false;
             _graphics.PreferredBackBufferWidth = _game.ScreenWidth;
             _graphics.PreferredBackBufferHeight = _game.ScreenHeight;
             _graphics.ApplyChanges();
-            // TODO: use this.Content to load your game content here
+            Window.Title = _game.WindowTitle;
         }
 
         protected override void Update(GameTime gameTime)
@@ -44,7 +45,6 @@ namespace CSharpEngine
                 Exit();
             }
             
-            // TODO: Add your update logic here
             _game.Update(gameTime);
             base.Update(gameTime);
         }
@@ -52,9 +52,9 @@ namespace CSharpEngine
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(_game.BackgroundColor);
-
-            // TODO: Add your drawing code here
+            _spriteBatch.Begin();
             _game.Draw();
+            _spriteBatch.End();
             base.Draw(gameTime);
         }
     }
