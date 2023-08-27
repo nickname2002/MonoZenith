@@ -74,7 +74,15 @@ public partial class Game
         _spriteBatch.Draw(texture, pos, null, Color.White, rotationAngle, origin, scale, effect, 0);
     }
     
-    public void DrawRectangle()
+    public void DrawRectangle(Color color, Vector2 pos, int width, int height)
+    {
+        Texture2D pixel = new Texture2D(_graphicsDeviceManager.GraphicsDevice, 1, 1);
+        pixel.SetData<Color>(new Color[] { Color.White });
+        Rectangle rect = new Rectangle((int)pos.X, (int)pos.Y, width, height);
+        _spriteBatch.Draw(pixel, rect, color);
+    }
+
+    public void DrawText()
     {
         throw new NotImplementedException();
     }

@@ -16,9 +16,9 @@ public partial class Game
 
     }
     
-    /* Draw objects. */
+    /* Draw objects/backdrop. */
     public void Draw()
     {
-
+        DrawRectangle(Color.Blue, new Vector2(100, 100), 100, 100);
     }
 }

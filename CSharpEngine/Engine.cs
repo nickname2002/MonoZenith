@@ -7,7 +7,7 @@ namespace CSharpEngine
 {
     public class Engine : Microsoft.Xna.Framework.Game
     {
-        private GraphicsDeviceManager _graphics;
+        private readonly GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private Game _game;
 
