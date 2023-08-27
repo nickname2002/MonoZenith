@@ -3,7 +3,7 @@ using System.IO;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace CSharpEngine;
+namespace MonoZenith;
 
 public partial class Game
 {
@@ -26,7 +26,7 @@ public partial class Game
         this._spriteBatch = s;
         this._graphicsDeviceManager = g;
         this._screenDimensions = (300, 300);
-        this._windowTitle = "C# Engine (title not final)";
+        this._windowTitle = "MonoZenith";
     }
 
     public void DebugLog(string msg)

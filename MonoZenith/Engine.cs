@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace CSharpEngine
+namespace MonoZenith
 {
     public class Engine : Microsoft.Xna.Framework.Game
     {
