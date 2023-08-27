@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace MonoZenith;
 
@@ -47,6 +48,12 @@ public partial class Game
     public void SetWindowTitle(string t)
     {
         this._windowTitle = t;
+    }
+
+    public bool GetKeyDown(Keys key)
+    {
+        KeyboardState state = Keyboard.GetState();
+        return state.IsKeyDown(key);
     }
 
     /* Source: https://community.monogame.net/t/loading-png-jpg-etc-directly/7403 */
