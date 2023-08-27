@@ -56,6 +56,16 @@ public partial class Game
         return state.IsKeyDown(key);
     }
 
+    public SpriteFont LoadFont(string filepath)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void DrawText(string content)
+    {
+        throw new NotImplementedException();
+    }
+
     /* Source: https://community.monogame.net/t/loading-png-jpg-etc-directly/7403 */
     public Texture2D LoadImage(string filepath)
     {
