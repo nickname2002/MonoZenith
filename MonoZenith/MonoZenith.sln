@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33530.505
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpEngine", "CSharpEngine\CSharpEngine.csproj", "{192B9A82-A9D4-4A78-874C-E61EF7874B60}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MonoZenith", "MonoZenith.csproj", "{1817D388-B768-485E-AF78-525634FE40B0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{192B9A82-A9D4-4A78-874C-E61EF7874B60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{192B9A82-A9D4-4A78-874C-E61EF7874B60}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{192B9A82-A9D4-4A78-874C-E61EF7874B60}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{192B9A82-A9D4-4A78-874C-E61EF7874B60}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1817D388-B768-485E-AF78-525634FE40B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1817D388-B768-485E-AF78-525634FE40B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1817D388-B768-485E-AF78-525634FE40B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1817D388-B768-485E-AF78-525634FE40B0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {37A26B8F-3C26-472D-B259-E47E17F2626A}
+		SolutionGuid = {6FED7B4F-2C1F-45EA-9314-C587DA3668B5}
 	EndGlobalSection
 EndGlobal
