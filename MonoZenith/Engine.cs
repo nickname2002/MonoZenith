@@ -21,7 +21,7 @@ namespace MonoZenith
         protected override void Initialize()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            _game = new Game(_spriteBatch, _graphics);
+            _game = new Game(_spriteBatch, _graphics, Content);
             base.Initialize();
         }
 

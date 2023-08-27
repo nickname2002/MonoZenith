@@ -1,6 +1,8 @@
 using System;
 using System.IO;
+using System.Net.Mime;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -14,6 +16,7 @@ public partial class Game
     private string _windowTitle;
     private readonly SpriteBatch _spriteBatch;
     private readonly GraphicsDeviceManager _graphicsDeviceManager;
+    private readonly ContentManager _content; 
 
     // Properties
     public Color BackgroundColor => this._backgroundColor;
@@ -21,13 +24,14 @@ public partial class Game
     public int ScreenHeight => this._screenDimensions.Item2;
     public string WindowTitle => this._windowTitle;
 
-    public Game(SpriteBatch s, GraphicsDeviceManager g)
+    public Game(SpriteBatch s, GraphicsDeviceManager g, ContentManager content)
     {
         this._backgroundColor = new Color(0, 0, 0);
         this._spriteBatch = s;
         this._graphicsDeviceManager = g;
         this._screenDimensions = (300, 300);
         this._windowTitle = "MonoZenith";
+        this._content = content;
     }
 
     public void DebugLog(string msg)
@@ -56,14 +60,15 @@ public partial class Game
         return state.IsKeyDown(key);
     }
 
-    public SpriteFont LoadFont(string filepath)
+    public SpriteFont LoadFont(string font)
     {
-        throw new NotImplementedException();
+        return _content.Load<SpriteFont>($"Fonts/{font}");
     }
 
-    public void DrawText(string content)
+    public void DrawText(string content, Vector2 pos, SpriteFont font, Color c)
     {
-        throw new NotImplementedException();
+        Vector2 origin = font.MeasureString(content) / 2;
+        _spriteBatch.DrawString(font, content, pos, c, 0, origin, 1.0f, SpriteEffects.None, 0);
     }
 
     /* Source: https://community.monogame.net/t/loading-png-jpg-etc-directly/7403 */
