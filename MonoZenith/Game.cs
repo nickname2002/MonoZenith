@@ -5,23 +5,23 @@ namespace MonoZenith;
 
 public partial class Game
 {
-    SpriteFont pixel;
+    private SpriteFont pixelFont;
 
     /* Initialize game vars and load assets. */
     public void Init()
     {
-        pixel = LoadFont("pixel");
+        pixelFont = LoadFont("pixel");
     }
 
     /* Update game logic. */
     public void Update(GameTime deltaTime)
     {
-
+        
     }
     
     /* Draw objects/backdrop. */
     public void Draw()
     {
-        DrawText("Hello, there!", new Vector2(100, 50), pixel, new Color(255, 255, 255));
+        DrawText("Hello, World!", new Vector2(100, 100), pixelFont, Color.White);
     }
 }
