@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -14,7 +15,7 @@ public partial class Game
     /* Update game logic. */
     public void Update(GameTime deltaTime)
     {
-
+        
     }
     
     /* Draw objects/backdrop. */

@@ -8,6 +8,8 @@ using Microsoft.Xna.Framework.Input;
 
 namespace MonoZenith;
 
+public enum MouseButtons { Left, Middle, Right }
+
 public partial class Game
 {
     // Members
@@ -58,6 +60,36 @@ public partial class Game
     {
         KeyboardState state = Keyboard.GetState();
         return state.IsKeyDown(key);
+    }
+
+    public bool GetMouseButtonDown(MouseButtons button)
+    {
+        var mouseState = Mouse.GetState();
+        switch (button)
+        {
+            case MouseButtons.Left:
+                return mouseState.LeftButton == ButtonState.Pressed;
+
+            case MouseButtons.Middle:
+                return mouseState.MiddleButton == ButtonState.Pressed;
+
+            case MouseButtons.Right:
+                return mouseState.RightButton == ButtonState.Pressed;
+        }
+
+        return false;
+    }
+
+    public Point GetMousePosition()
+    {
+        var mouseState = Mouse.GetState();
+        return mouseState.Position;
+    }
+
+    public int GetMouseWheelValue()
+    {
+        var mouseSate = Mouse.GetState();
+        return mouseSate.ScrollWheelValue;
     }
 
     public SpriteFont LoadFont(string font)
