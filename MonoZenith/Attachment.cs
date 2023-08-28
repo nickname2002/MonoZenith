@@ -1,10 +1,11 @@
 using System;
 using System.IO;
-using System.Net.Mime;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 
 namespace MonoZenith;
 
@@ -137,8 +138,9 @@ public partial class Game
         _spriteBatch.Draw(pixel, rect, color);
     }
 
-    public void DrawText()
+    // TODO: This method still needs to be tested.
+    public SoundEffectInstance LoadAudio(string filePath)
     {
-        throw new NotImplementedException();
+        return _content.Load<SoundEffect>(Path.Combine("Content", filePath)).CreateInstance();
     }
 }
