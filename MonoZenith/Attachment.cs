@@ -1,5 +1,7 @@
 using System;
+using System.Diagnostics;
 using System.IO;
+using System.Media;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
@@ -141,6 +143,14 @@ public partial class Game
     // TODO: This method still needs to be tested.
     public SoundEffectInstance LoadAudio(string filePath)
     {
-        return _content.Load<SoundEffect>(Path.Combine("Content", filePath)).CreateInstance();
+        DebugLog(Directory.GetCurrentDirectory());
+        if (File.Exists(filePath))
+        {
+            return SoundEffect.FromStream(TitleContainer.OpenStream(filePath)).CreateInstance();
+        } 
+        
+        DebugLog($"Audio File {filePath} does not exist.");
+        return null;
+
     }
 }
