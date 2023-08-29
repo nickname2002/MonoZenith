@@ -9,6 +9,7 @@ namespace MonoZenith
     {
         private readonly GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
+        private GameFacade _gameFacade;
         private Game _game;
 
         public Engine()
@@ -21,7 +22,8 @@ namespace MonoZenith
         protected override void Initialize()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            _game = new Game(_spriteBatch, _graphics, Content);
+            _gameFacade = new GameFacade(_spriteBatch, _graphics, Content);
+            _game = new Game(_gameFacade);
             base.Initialize();
         }
 
