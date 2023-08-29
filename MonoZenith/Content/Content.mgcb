@@ -13,4 +13,9 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin Audio/wing.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/wing.wav
 
