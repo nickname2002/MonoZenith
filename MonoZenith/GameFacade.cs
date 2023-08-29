@@ -61,19 +61,13 @@ public class GameFacade
     public bool GetMouseButtonDown(MouseButtons button)
     {
         var mouseState = Mouse.GetState();
-        switch (button)
+        return button switch
         {
-            case MouseButtons.Left:
-                return mouseState.LeftButton == ButtonState.Pressed;
-    
-            case MouseButtons.Middle:
-                return mouseState.MiddleButton == ButtonState.Pressed;
-    
-            case MouseButtons.Right:
-                return mouseState.RightButton == ButtonState.Pressed;
-        }
-    
-        return false;
+            MouseButtons.Left => mouseState.LeftButton == ButtonState.Pressed,
+            MouseButtons.Middle => mouseState.MiddleButton == ButtonState.Pressed,
+            MouseButtons.Right => mouseState.RightButton == ButtonState.Pressed,
+            _ => false
+        };
     }
     
     public Point GetMousePosition()
@@ -128,7 +122,7 @@ public class GameFacade
     public void DrawRectangle(Color color, Vector2 pos, int width, int height)
     {
         Texture2D pixel = new Texture2D(_graphicsDeviceManager.GraphicsDevice, 1, 1);
-        pixel.SetData<Color>(new Color[] { Color.White });
+        pixel.SetData(new[] { Color.White });
         Rectangle rect = new Rectangle((int)pos.X, (int)pos.Y, width, height);
         _spriteBatch.Draw(pixel, rect, color);
     }
