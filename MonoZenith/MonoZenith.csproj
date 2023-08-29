@@ -14,6 +14,8 @@
     <None Remove="Icon.ico" />
     <None Remove="Icon.bmp" />
     <None Remove=".mgstats" />
+    <None Include="bin\Debug\net6.0\Content\Fonts\pixel.ttf" />
+    <None Include="bin\Debug\net6.0\Content\Fonts\pixel.xnb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icon.ico" />
@@ -23,6 +25,7 @@
     <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.1.303" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="bin\Debug\net6.0" />
     <Folder Include="Content\Audio\" />
     <Folder Include="Content\Textures\" />
   </ItemGroup>
