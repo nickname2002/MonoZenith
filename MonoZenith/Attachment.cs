@@ -140,17 +140,10 @@ public partial class Game
         _spriteBatch.Draw(pixel, rect, color);
     }
 
-    // TODO: This method still needs to be tested.
     public SoundEffectInstance LoadAudio(string filePath)
     {
-        DebugLog(Directory.GetCurrentDirectory());
-        if (File.Exists(filePath))
-        {
-            return SoundEffect.FromStream(TitleContainer.OpenStream(filePath)).CreateInstance();
-        } 
-        
-        DebugLog($"Audio File {filePath} does not exist.");
-        return null;
-
+        using var stream = File.OpenRead(filePath);
+        var soundEffect = SoundEffect.FromStream(stream);
+        return soundEffect.CreateInstance();
     }
 }

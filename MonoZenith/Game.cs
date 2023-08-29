@@ -11,22 +11,18 @@ public partial class Game
     /* Initialize game vars and load assets. */
     public void Init()
     {
-        // wing = LoadAudio("Content/Audio/wing.wav");
+        wing = LoadAudio("Content/Audio/wing.wav");
     }
 
     /* Update game logic. */
     public void Update(GameTime deltaTime)
     {
-        if (wing != null)
-        {
-            // Play the audio
-            wing.Play();
-        }
+
     }
     
     /* Draw objects/backdrop. */
     public void Draw()
     {
-        
+        wing.Play();
     }
 }
