@@ -1,16 +1,19 @@
 # MonoZenith
-MonoZenith is a wrapper for MonoGame, with the goal to make developing games using C# a 
-faster process. Initially, MonoZenith was developed for personal use, but I decided to make 
-it public to make it easier for others to develop games using MonoGame. **MonoZenith is still
-in development, and is not yet ready for use in a production environment**.
 
-## Contents
+**MonoZenith** is a lightweight MonoGame wrapper designed to streamline game development using C#. It aims to simplify the game development process by providing useful abstractions and helper methods, allowing developers to focus on creating engaging gameplay experiences.
+The project is currently in development, and is not yet ready for use in production. New features and bug fixes will be added in the future.
+
+## Table of contents
 - [Files & folders](#files--folders)
 - [Provided helper methods](#provided-helper-methods)
 - [Setup](#setup)
 - [Usage](#usage)
   - [`Init`, `Update` & `Draw`](#init--update--draw)
   - [Setting up the screen](#setting-up-the-screen)
+  - [Loading assets](#loading-assets)
+  - [Using assets](#using-assets)
+- [Known issues](#known-issues)
+- [Maintenance](#maintenance)
 
 ## Files & folders
 - `Program.cs` - This file is the entry point for the MonoZenith application. 
@@ -39,8 +42,8 @@ MonoZenith
 └── readme.md
 ````
 
-## Provided helper methods
-Currently, the wrapper provides abstractions for MonoGame using the following methods:
+## Provided Helper Methods
+MonoZenith offers abstractions for MonoGame using the following methods:
 
 ### Debugging
 - `DebugLog(string msg) : void`
@@ -50,37 +53,33 @@ Currently, the wrapper provides abstractions for MonoGame using the following me
 - `SetScreenSize(int w, int h) : void`
 - `SetWindowTitle(string t) : void`
 
-### Keyboard & mouse
+### Keyboard & Mouse
 - `GetKeyDown(Keys key) : bool`
 - `GetMouseButtonDown(MouseButtons button) : bool`
 - `GetMousePosition() : Point`
 - `GetMouseWheelValue() : int`
 
-### Loading assets
+### Loading Assets
 - `LoadFont(string font) : SpriteFont`
 - `LoadImage(string filepath) : Texture2D`
 - `LoadSound(string filepath) : SoundEffect`
 
-### Drawing objects
+### Drawing Objects
 - `DrawText(string text, SpriteFont font, Vector2 position, Color color, float scale=1, float angle=0) : void`
 - `DrawImage(Texture2D image, Vector2 position, float scale=1, float angle=0, bool flipped=false) : void`
 - `DrawRectangle(Color color, Vector2 pos, int width, int height) : void`
 
 ## Setup
-MonoZenith can be set up for your project in two ways.
-<br/>The first way is to download the .zip folder of the project on GitHub. 
-<br/>The second and recommended way is to fork the project on GitHub, and clone it to your local 
-machine. This way, you can build upon the latest build of MonoZenith. 
+You can set up MonoZenith for your project in two ways:
+
+1. Download the .zip folder of the project from GitHub.
+2. Fork the project on GitHub and clone it to your local machine for the latest build.
 
 ## Usage
-This section contains some instructions on how to use this template as intended. 
+Learn how to use MonoZenith with the provided helper methods.
 
-### `Init`, `Update` & `Draw`
-The three basic methods of the game are `Init`, `Update` and `Draw`.
-- The `Init` method is called once, when the game is started. This method is used to initialize
-the game, and should be used to load all the assets needed for the game.
-- The `Update` method is called every frame, and is used to update the game logic.
-- The `Draw` method is called every frame, and is used to draw the necessary objects onto the screen.
+### Initializing, Updating & Drawing
+The three core methods for your game are `Init`, `Update`, and `Draw`. Here's a basic template:
 
 ```csharp
 using Microsoft.Xna.Framework;
@@ -110,9 +109,7 @@ public partial class Game
 ```
 
 ### Setting up the screen
-Initially, the screen size is set to be 300x300 pixels. Besides, the screen has a starting 
-background color of black and a title of "MonoZenith". These properties can be changed
-using the provided helper methods in the `Game` class.
+Modify screen properties using helper methods in the `Init` method:
 
 ```csharp
 /* Initialize game vars and load assets. */
@@ -123,11 +120,48 @@ public void Init()
    SetWindowTitle("My game");     
 }
 ```
-### TODO: Adding assets
+### Loading assets
+Load assets from the `Content` folder using provided methods:
 
-### TODO: Example game (inclusion of drawing rectangles)
+```csharp
+Texture2D myImage;
+SoundEffect mySound;
+SpriteFont myFont;
+
+/* Initialize game vars and load assets. */
+public void Init()
+{
+   myImage = LoadImage("Textures/myImage.png");
+   mySound = LoadSound("Audio/mySound.wav");
+   myFont = LoadFont("myFont");
+}
+```
+
+### Using assets
+Incorporate assets into your game's logic and rendering:
+    
+```csharp
+/* Update game logic. */
+public void Update(GameTime deltaTime)
+{
+   if (GetKeyDown(Keys.Space))
+   {
+      mySound.Play();
+   }
+}
+
+/* Draw objects/backdrop. */
+public void Draw()
+{
+   DrawImage(myImage, new Vector2(100, 100));
+   DrawText("Hello world!", myFont, new Vector2(100, 100), Color.Black);
+}
+```
+
+## Known issues
+- Only the "pixel.ttf" font can be used due to conversion limitations. This will be addressed in the future.
 
 ## Maintenance
 This project is maintained by [Nick Jordan](https://www.linkedin.com/in/nick-jordan-11247bba/).
-For questions, suggestions, or other inquiries, please [contact](mailto:nickjordan2002@gmail.com) me. 
+For questions, suggestions, or inquiries, [contact](mailto:nickjordan2002@gmail.com) me.
 
