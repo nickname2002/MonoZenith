@@ -27,7 +27,7 @@ public partial class Game
     /// Log a message to the console.
     /// </summary>
     /// <param name="msg">Message</param>
-    private void DebugLog(string msg)
+    public void DebugLog(string msg)
     {
         Console.WriteLine(msg);
     }
@@ -36,7 +36,7 @@ public partial class Game
     /// Set the background color.
     /// </summary>
     /// <param name="c">Color</param>
-    private void SetBackgroundColor(Color c)
+    public void SetBackgroundColor(Color c)
     {
         _facade.SetBackgroundColor(c);
     }
@@ -55,7 +55,7 @@ public partial class Game
     /// Set the window title.
     /// </summary>
     /// <param name="t">The window title.</param>
-    private void SetWindowTitle(string t)
+    public void SetWindowTitle(string t)
     {
         _facade.SetWindowTitle(t);
     }
@@ -65,7 +65,7 @@ public partial class Game
     /// </summary>
     /// <param name="key">The key that is checked.</param>
     /// <returns>Whether the provided key is pressed.</returns>
-    private bool GetKeyDown(Keys key)
+    public bool GetKeyDown(Keys key)
     {
         return _facade.GetKeyDown(key);
     }
@@ -75,7 +75,7 @@ public partial class Game
     /// </summary>
     /// <param name="button">The button that is checked.</param>
     /// <returns>Whether a mouse button is pressed.</returns>
-    private bool GetMouseButtonDown(MouseButtons button)
+    public bool GetMouseButtonDown(MouseButtons button)
     {
         return _facade.GetMouseButtonDown(button);
     }
@@ -84,7 +84,7 @@ public partial class Game
     /// Get the mouse position.
     /// </summary>
     /// <returns>Position of the mouse pointer.</returns>
-    private Point GetMousePosition()
+    public Point GetMousePosition()
     {
         return _facade.GetMousePosition();
     }
@@ -93,7 +93,7 @@ public partial class Game
     /// Get the mouse wheel value.
     /// </summary>
     /// <returns>The value of the mouse wheel.</returns>
-    private int GetMouseWheelValue()
+    public int GetMouseWheelValue()
     {
         return _facade.GetMouseWheelValue();
     }
@@ -103,7 +103,7 @@ public partial class Game
     /// </summary>
     /// <param name="font">Name of the font to be loaded.</param>
     /// <returns>The SpriteFont of the requested font.</returns>
-    private SpriteFont LoadFont(string font)
+    public SpriteFont LoadFont(string font)
     {
         return _facade.LoadFont(font);
     }
@@ -117,7 +117,7 @@ public partial class Game
     /// <param name="c">Color</param>
     /// <param name="scale">Scale</param>
     /// <param name="angle">Rotational angle</param>
-    private void DrawText(string content, Vector2 pos, SpriteFont font, Color c, float scale=1, float angle=0)
+    public void DrawText(string content, Vector2 pos, SpriteFont font, Color c, float scale=1, float angle=0)
     {
         _facade.DrawText(content, pos, font, c, scale, angle);
     }
@@ -128,7 +128,7 @@ public partial class Game
     /// </summary>
     /// <param name="filepath">Filepath</param>
     /// <returns>Texture of the requested image.</returns>
-    private Texture2D LoadImage(string filepath)
+    public Texture2D LoadImage(string filepath)
     {
         return _facade.LoadImage(filepath);
     }
@@ -142,7 +142,7 @@ public partial class Game
     /// <param name="scale">Scale</param>
     /// <param name="angle">Rotational angle</param>
     /// <param name="flipped">Horizontally flipped</param>
-    private void DrawImage(Texture2D texture, Vector2 pos, float scale=1, float angle=0, bool flipped=false)
+    public void DrawImage(Texture2D texture, Vector2 pos, float scale=1, float angle=0, bool flipped=false)
     {
         _facade.DrawImage(texture, pos, scale, angle, flipped);
     }
@@ -154,7 +154,7 @@ public partial class Game
     /// <param name="pos">Position</param>
     /// <param name="width">Width</param>
     /// <param name="height">Height</param>
-    private void DrawRectangle(Color color, Vector2 pos, int width, int height)
+    public void DrawRectangle(Color color, Vector2 pos, int width, int height)
     {
         _facade.DrawRectangle(color, pos, width, height);
     }
@@ -164,7 +164,7 @@ public partial class Game
     /// </summary>
     /// <param name="filePath">Filepath to the audio file to be loaded.</param>
     /// <returns>SoundEffectInstance of the audio file.</returns>
-    private SoundEffectInstance LoadAudio(string filePath)
+    public SoundEffectInstance LoadAudio(string filePath)
     {
         return _facade.LoadAudio(filePath);
     }
