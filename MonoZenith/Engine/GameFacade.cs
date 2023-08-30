@@ -123,13 +123,13 @@ public class GameFacade
     {
         Texture2D pixel = new Texture2D(_graphicsDeviceManager.GraphicsDevice, 1, 1);
         pixel.SetData(new[] { Color.White });
-        Rectangle rect = new Rectangle((int)pos.X, (int)pos.Y, width, height);
+        Rectangle rect = new Rectangle((int)pos.X - width / 2, (int)pos.Y - height / 2, width, height);
         _spriteBatch.Draw(pixel, rect, color);
     }
 
     public SoundEffectInstance LoadAudio(string filePath)
     {
-        using var stream = File.OpenRead(filePath);
+        using var stream = File.OpenRead("Content/" + filePath);
         var soundEffect = SoundEffect.FromStream(stream);
         return soundEffect.CreateInstance();
     }

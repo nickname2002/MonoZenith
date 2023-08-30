@@ -16,30 +16,34 @@ The project is currently in development, and is not yet ready for use in product
 - [Maintenance](#maintenance)
 
 ## Files & folders
-- `Program.cs` - This file is the entry point for the MonoZenith application. 
-- `Engine.cs` - This file contains the `Engine` class, containing the basic logic for the MonoGame application.
-- `Attachment.cs` - This file contains the most logic of the `Game` class. All the helper methods, mostly containing a call to another helper method in the `GameFacade`, can be found in this file.
-- `Game.cs` - This file contains the remainder of the `Game` class, which is the base class for all games created using MonoZenith. All gameplay related logic needs to be implemented in this file.
-- `GameFacade.cs` - This file contains the `GameFacade` class, which contains properties and complexity used to perform MonoGame activities.
+- `Components` - This folder contains all the UI components that can be used in a MonoZenith game. 
 - `Content` - This folder contains all the assets for the MonoGame application. This includes images, fonts, and audio files.
 The remainder of the files and folders are used for the MonoGame application, and can be ignored for now.
+- `Engine` - This contains all the backend logic for the MonoZenith project.
+- `Game.cs` - This file contains the remainder of the `Game` class, which is the base class for all games created using MonoZenith. All gameplay related logic needs to be implemented in this file.
 
 ````
 MonoZenith
-├── Attachment.cs
+├── Components
+├─────── Button.cs
+├─────── Component.cs
 ├── Content
 ├─────── Audio
-├─────── Fonts
+├─────── Content.mgcb
 ├─────── Textures
-├── Engine.cs
+├─────── Fonts
+├─────────── pixel.spritefont
+├─────────── pixel.ttf
+├── Engine
+├─────── Attachment.cs
+├─────── Engine.cs
+├─────── GameFacade.cs
+├─────── Program.cs
 ├── Game.cs
-├── GameFacade.cs
 ├── Icon.bmp
 ├── Icon.ico
 ├── MonoZenith.csproj
-├── MonoZenith.sln
-├── Program.cs
-└── readme.md
+└── MonoZenith.sln
 ````
 
 ## Provided Helper Methods
@@ -158,8 +162,46 @@ public void Draw()
 }
 ```
 
+### Initializing & using UI components
+Initialize UI components in the `Init` method. Update and draw them in the `Update` and `Draw` methods, respectively:
+
+```csharp
+Button myButton;
+    
+/* Initialize game vars and load assets. */
+public void Init()
+{
+    SetScreenSize(800, 600);
+    SetBackgroundColor(Color.White);
+    
+    // Initialize button
+    myButton = new Button(
+        this,                          // Game reference
+        new Vector2(400, 300),         // Position
+        400, 100,                      // Width, Height
+        "Click me!", 2, Color.White,   // Text, Font Size, Text Color
+        Color.Black,                   // Button Color
+        3, Color.Red);                 // Border Width, Border Color
+    }
+
+/* Update game logic. */
+public void Update(GameTime deltaTime)
+{
+    myButton.Update(deltaTime);
+    myButton.SetOnClickAction(() => DebugLog("UwU"));
+}
+    
+/* Draw objects/backdrop. */
+public void Draw()
+{
+    myButton.Draw();
+}
+```
+
 ## Known issues
 - Only the "pixel.ttf" font can be used due to conversion limitations. This will be addressed in the future.
+- At the moment, the assets need to be placed inside the `Content` folder within the `bin` folder. This is not the intended 
+behavior, and will be addressed in the future.
 
 ## Maintenance
 This project is maintained by [Nick Jordan](https://www.linkedin.com/in/nick-jordan-11247bba/).

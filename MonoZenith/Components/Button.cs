@@ -114,8 +114,8 @@ public class Button : Component
 
     private void DrawBorder()
     {
-        float borderX = Position.X - BorderWidth;
-        float borderY = Position.Y - BorderWidth;
+        float borderX = Position.X - Width / 2 - BorderWidth;
+        float borderY = Position.Y - Height / 2 - BorderWidth;
         Vector2 borderPos = new Vector2(borderX, borderY);
         float borderRectWidth = Width + 2 * BorderWidth;
         float borderRectHeight = Height + 2 * BorderWidth;
@@ -124,16 +124,14 @@ public class Button : Component
     
     private void DrawBorderContent()
     {
-        float contentPosX = Position.X + (float)Width / 2;
-        float contentPosY = Position.Y + (float)Height / 2;
-        Vector2 contentPos = new Vector2(contentPosX, contentPosY);
-        Game.DrawText(Content, contentPos, _font, ContentColor, _contentScale);
+        Game.DrawText(Content, Position, _font, ContentColor, _contentScale);
     }
     
     public override void Draw()
     {
         DrawBorder();
-        Game.DrawRectangle(ButtonColor, Position, Width, Height);
+        Vector2 drawPos = new Vector2(Position.X - Width / 2, Position.Y - Height / 2);
+        Game.DrawRectangle(ButtonColor, drawPos, Width, Height);
         DrawBorderContent();
     }
 }
