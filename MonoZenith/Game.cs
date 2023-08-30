@@ -9,7 +9,7 @@ public partial class Game
     /* Initialize game vars and load assets. */
     public void Init()
     {
-
+        
     }
 
     /* Update game logic. */
