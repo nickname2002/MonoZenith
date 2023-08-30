@@ -9,7 +9,7 @@ public partial class Game
     /* Initialize game vars and load assets. */
     public void Init()
     {
-        
+
     }
 
     /* Update game logic. */
@@ -21,6 +21,6 @@ public partial class Game
     /* Draw objects/backdrop. */
     public void Draw()
     {
-
+        
     }
 }
