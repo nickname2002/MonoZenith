@@ -12,6 +12,8 @@ The project is currently in development, and is not yet ready for use in product
   - [Setting up the screen](#setting-up-the-screen)
   - [Loading assets](#loading-assets)
   - [Using assets](#using-assets)
+  - [Initializing & using UI components](#initializing--using-ui-components)
+  - [Colliders](#colliders)
 - [Known issues](#known-issues)
 - [Maintenance](#maintenance)
 
