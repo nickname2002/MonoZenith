@@ -198,6 +198,10 @@ public void Draw()
 }
 ```
 
+### Tilemap reading
+Reading tilemaps is not built into MonoZenith. However, for reading tilemaps, the framework TiledSharp is recommended.
+An example of reading a tilemap using TiledSharp is provided [here](https://github.com/Temeez/TiledSharp-MonoGame-Example/blob/master/TiledSharp%20MonoGame%20Example/Game1.cs).
+
 ## Known issues
 - Only the "pixel.ttf" font can be used due to conversion limitations. This will be addressed in the future.
 - At the moment, the assets need to be placed inside the `Content` folder within the `bin` folder. This is not the intended 
