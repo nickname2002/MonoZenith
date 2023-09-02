@@ -198,6 +198,47 @@ public void Draw()
 }
 ```
 
+### Colliders
+Colliders are used to detect collisions between objects. They can be initialized in the `Init` method and updated in the `Update` method. 
+Besides, they can be drawn in the `Draw` method for debugging purposes:
+
+```csharp
+/* Initialize game vars and load assets. */
+public void Init()
+{
+    SetScreenSize(800, 600);
+        
+    // Create position for collider c
+    pos = new Vector2(100, 0);
+        
+    // Setup colliders
+    c = new Collider(this, pos, 50, 50);
+    c2 = new Collider(this, new Vector2(100, 100), 50, 50);
+}
+
+/* Update game logic. */
+public void Update(GameTime deltaTime)
+{
+    // Stop if c collides with c2
+    if (c.CollidesWith(c2))
+    {
+        return;
+    }
+        
+    // Move c down
+    pos.Y += 0.5f;
+    c.Update(pos);
+}
+    
+/* Draw objects/backdrop. */
+public void Draw()
+{
+    // Draw colliders
+    c.Draw();
+    c2.Draw();
+}
+```
+
 ### Tilemap reading
 Reading tilemaps is not built into MonoZenith. However, for reading tilemaps, the framework TiledSharp is recommended.
 An example of reading a tilemap using TiledSharp is provided [here](https://github.com/Temeez/TiledSharp-MonoGame-Example/blob/master/TiledSharp%20MonoGame%20Example/Game1.cs).
