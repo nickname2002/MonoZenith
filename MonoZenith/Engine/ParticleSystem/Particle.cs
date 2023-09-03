@@ -14,6 +14,7 @@ public class Particle
     public Color Color { get; set; }
     public int Size { get; set; }
     public float Lifespan { get; set; }
+    private float _startingLifespan;
 
     public Particle(Random r, Game g, Texture2D texture, Vector2 position, Vector2 velocity, Color color, int size, float lifespan)
     {
@@ -25,6 +26,7 @@ public class Particle
         Color = color;
         Size = size;
         Lifespan = lifespan;
+        _startingLifespan = lifespan;
     }
     
     public virtual void Update(GameTime gameTime)
@@ -33,14 +35,16 @@ public class Particle
         velocity.X += (float)(_random.NextDouble() - 0.5) * 5f;
         Position += velocity;
         Lifespan -= (float)gameTime.ElapsedGameTime.TotalSeconds;
-        
-        // TODO: doesn't work yet
-        // Make color dim over time
+        UpdateTransparencyOverLifeTime();
+    }
+
+    protected void UpdateTransparencyOverLifeTime()
+    {
         Color = new Color(
             Color.R,
             Color.G,
             Color.B,
-            Lifespan * 255);
+            Lifespan / _startingLifespan);    
     }
     
     public void Draw()
@@ -54,7 +58,7 @@ public class Particle
                 Size);
             return;
         }
-            
+        
         _game.DrawImage(_texture, Position);
     }
 }

@@ -241,6 +241,58 @@ public void Draw()
 }
 ```
 
+### Particle system
+The particle system is used to create particle effects. It makes use of the `ParticleManager` class, which is initialized 
+in the `Init` method. Particles are updated in the `Update` method and drawn in the `Draw` method:
+
+```csharp
+private ParticleManager _particleManager;
+    
+/* Initialize game vars and load assets. */
+public void Init()
+{
+    SetScreenSize(800, 600);
+    SetBackgroundColor(Color.White);
+    _particleManager = new ParticleManager(this);
+}
+
+/* Update game logic. */
+public void Update(GameTime gameTime)
+{
+    _particleManager.CreateParticle(
+        null, 
+        new Vector2(400, 300), 
+        new Vector2(0, -1), 
+        Color.Black, 
+        5, 
+        3);
+    _particleManager.Update(gameTime);
+}
+
+/* Draw objects/backdrop. */
+public void Draw()
+{
+    _particleManager.Draw();
+}
+```
+To create custom particles (recommended), create a class that inherits from `Particle`. Then, override the `Update`
+method to define the particle's behavior:
+
+```csharp
+public class MyParticle : Particle
+{
+    public MyParticle(Game game, Texture2D texture, Vector2 position, Vector2 velocity, Color color, float scale, float lifeTime) 
+        : base(game, texture, position, velocity, color, scale, lifeTime)
+    {
+    }
+
+    public override void Update(GameTime gameTime)
+    {
+        // Define particle behavior here
+    }
+}
+```
+
 ### Tilemap reading
 Reading tilemaps is not built into MonoZenith. However, for reading tilemaps, the framework TiledSharp is recommended.
 An example of reading a tilemap using TiledSharp is provided [here](https://github.com/Temeez/TiledSharp-MonoGame-Example/blob/master/TiledSharp%20MonoGame%20Example/Game1.cs).
@@ -249,6 +301,7 @@ An example of reading a tilemap using TiledSharp is provided [here](https://gith
 - Only the "pixel.ttf" font can be used due to conversion limitations. This will be addressed in the future.
 - At the moment, the assets need to be placed inside the `Content` folder within the `bin` folder. This is not the intended 
 behavior, and will be addressed in the future.
+- Particle transparency only works with light backdrops. This will be addressed in the future.
 
 ## Maintenance
 This project is maintained by [Nick Jordan](https://www.linkedin.com/in/nick-jordan-11247bba/).

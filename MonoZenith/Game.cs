@@ -12,6 +12,7 @@ public partial class Game
     public void Init()
     {
         SetScreenSize(800, 600);
+        SetBackgroundColor(Color.White);
         _particleManager = new ParticleManager(this);
     }
 
@@ -22,7 +23,7 @@ public partial class Game
             null, 
             new Vector2(400, 300), 
             new Vector2(0, -1), 
-            Color.Gold, 
+            Color.Black, 
             5, 
             3);
         _particleManager.Update(gameTime);
