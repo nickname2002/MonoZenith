@@ -54,7 +54,7 @@ namespace MonoZenith
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(_game.BackgroundColor);
-            _spriteBatch.Begin();
+            _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
             _game.Draw();
             _spriteBatch.End();
             base.Draw(gameTime);
