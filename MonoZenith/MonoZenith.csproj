@@ -28,8 +28,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\Debug\net6.0" />
-    <Folder Include="Content\Audio\" />
-    <Folder Include="Content\Textures\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="bin\Debug\net6.0\Content\Audio\placeholder.txt" />

@@ -18,24 +18,23 @@ The project is currently in development, and is not yet ready for use in product
 - [Maintenance](#maintenance)
 
 ## Files & folders
+- `bin/Debug/net6/Content` - This folder contains all the assets used in the game.
 - `Components` - This folder contains all the UI components that can be used in a MonoZenith game. 
-- `Content` - This folder contains all the assets for the MonoGame application. This includes images, fonts, and audio files.
-The remainder of the files and folders are used for the MonoGame application, and can be ignored for now.
+- `Content` - This folder contains the MGCB file, which is used to load assets into the game.
 - `Engine` - This contains all the backend logic for the MonoZenith project.
 - `Game.cs` - This file contains the remainder of the `Game` class, which is the base class for all games created using MonoZenith. All gameplay related logic needs to be implemented in this file.
 
 ````
 MonoZenith
+├── bin
+├─────── Debug
+├─────────── net6
+├─────────────── Content
 ├── Components
 ├─────── Button.cs
 ├─────── Component.cs
 ├── Content
-├─────── Audio
 ├─────── Content.mgcb
-├─────── Textures
-├─────── Fonts
-├─────────── pixel.spritefont
-├─────────── pixel.ttf
 ├── Engine
 ├─────── Attachment.cs
 ├─────── Engine.cs
