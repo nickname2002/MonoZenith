@@ -65,10 +65,10 @@ public class Button : Component
         Point mousePos = Game.GetMousePosition();
 
         // In X range
-        if (mousePos.X > Position.X - BorderWidth && mousePos.X < Position.X + Width + BorderWidth)
+        if (mousePos.X > Position.X - Width / 2 - BorderWidth && mousePos.X < Position.X + Width / 2 + BorderWidth)
         {
             // In Y range
-            if (mousePos.Y > Position.Y - BorderWidth && mousePos.Y < Position.Y + Height + BorderWidth)
+            if (mousePos.Y > Position.Y - Height / 2 - BorderWidth && mousePos.Y < Position.Y + Height / 2 + BorderWidth)
             {
                 return true;
             }
@@ -114,8 +114,8 @@ public class Button : Component
 
     private void DrawBorder()
     {
-        float borderX = Position.X - Width / 2 - BorderWidth;
-        float borderY = Position.Y - Height / 2 - BorderWidth;
+        float borderX = Position.X;
+        float borderY = Position.Y;
         Vector2 borderPos = new Vector2(borderX, borderY);
         float borderRectWidth = Width + 2 * BorderWidth;
         float borderRectHeight = Height + 2 * BorderWidth;
@@ -130,8 +130,7 @@ public class Button : Component
     public override void Draw()
     {
         DrawBorder();
-        Vector2 drawPos = new Vector2(Position.X - Width / 2, Position.Y - Height / 2);
-        Game.DrawRectangle(ButtonColor, drawPos, Width, Height);
+        Game.DrawRectangle(ButtonColor, Position, Width, Height);
         DrawBorderContent();
     }
 }

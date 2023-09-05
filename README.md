@@ -207,6 +207,10 @@ Colliders are used to detect collisions between objects. They can be initialized
 Besides, they can be drawn in the `Draw` method for debugging purposes:
 
 ```csharp
+private Vector2 pos;
+private Collider c;
+private Collider c2;
+
 /* Initialize game vars and load assets. */
 public void Init()
 {

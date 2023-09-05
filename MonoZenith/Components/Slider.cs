@@ -85,7 +85,7 @@ public class Slider : Component
     private void DrawSlider()
     {
         int sliderWidth = 15;
-        int sliderHeight = Height * 4;
+        int sliderHeight = (int)(Height * 2.5f);
         int sliderX = (int)(Position.X - Width / 2 + Width * (Value - Min) / (Max - Min));
         Game.DrawRectangle(
             SliderColor, 
