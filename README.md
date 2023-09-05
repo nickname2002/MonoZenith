@@ -14,6 +14,9 @@ The project is currently in development, and is not yet ready for use in product
   - [Using assets](#using-assets)
   - [Initializing & using UI components](#initializing--using-ui-components)
   - [Colliders](#colliders)
+  - [Timers](#timers)
+  - [Particle system](#particle-system)
+  - [Tilemap reading](#tilemap-reading)
 - [Known issues](#known-issues)
 - [Maintenance](#maintenance)
 
@@ -237,6 +240,52 @@ public void Draw()
     // Draw colliders
     c.Draw();
     c2.Draw();
+}
+```
+
+### Timers
+Timers are used to execute code after a certain amount of time has passed. The `TimerManager` class is used to manage timers.
+A new timer can be initialized using the `CreateTimer` method. For initialization, the timer needs an index (to identify the timer)
+and a time (in milliseconds) to wait before executing the code. All timers managed by the `TimerManager` class are updated in the `Update` method.
+<br /><br /> 
+A `Delay` object stores the index and delay time of a timer. It can be used to easily create and manage timers. If the 'Delay'
+serves a different purpose, requiring a different name, a new class can be created that inherits from `Delay`.
+```csharp
+
+public partial class Game
+{
+    private TimerManager _timerManager;
+    
+    // Delays
+    private Delay _walkAnimationDelay; // (index, delay (ms))
+    
+    /* Initialize game vars and load assets. */
+    public void Init()
+    {
+        _timerManager = new TimerManager();
+        
+        // Delays
+        _walkAnimationDelay = new Delay(0, 1000);
+    }
+
+    /* Update game logic. */
+    public void Update(GameTime gameTime)
+    {
+        _timerManager.CreateTimer(_walkAnimationDelay.Index, _walkAnimationDelay.DelayTime);
+        _timerManager.Update(gameTime);
+
+        if (_timerManager.TimerOver(_walkAnimationDelay.Index))
+        {
+            DebugLog("Timer over! Resetting timer...");
+            _timerManager.ResetTimer(_walkAnimationDelay.Index);
+        }
+    }
+
+    /* Draw objects/backdrop. */
+    public void Draw()
+    {
+        
+    }
 }
 ```
 
