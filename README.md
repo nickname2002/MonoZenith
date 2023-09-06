@@ -7,7 +7,7 @@
 ## Getting Started
 
 1. Download the project from GitHub or fork it and clone to your local machine.
-2. Refer to the [wiki](https://github.com/YourRepo/MonoZenith/wiki) for comprehensive documentation and usage instructions.
+2. Refer to the [wiki](https://github.com/nickname2002/MonoZenith/wiki) for comprehensive documentation and usage instructions.
 
 ## Features
 
@@ -26,5 +26,5 @@
 
 ## Maintenance
 
-This project is maintained by [Your Name](mailto:your@email.com).
+This project is maintained by [Nick Jordan](mailto:nickjordan2002@gmail.com).
 For questions or suggestions, please feel free to contact me. Additionally, refer to the [wiki](https://github.com/nickname2002/MonoZenith/wiki) for more information.
