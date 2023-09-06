@@ -1,4 +1,7 @@
-﻿using System.IO;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -39,6 +42,39 @@ namespace MonoZenith
             Window.Title = _game.WindowTitle;
         }
 
+        private void HandleControllerSupport()
+        {
+            GamePadCapabilities capabilities = GamePad.GetCapabilities(PlayerIndex.One);
+
+            if (!capabilities.IsConnected)
+                return;
+
+            _gameFacade.ControllerConnected = true;
+
+            Dictionary<Func<GamePadCapabilities, bool>, Action> capabilityMappings = new Dictionary<Func<GamePadCapabilities, bool>, Action>
+            {
+                { cap => cap.HasLeftXThumbStick, () => _gameFacade.HasLeftStick = true },
+                { cap => cap.HasRightXThumbStick, () => _gameFacade.HasRightStick = true },
+                { cap => cap.HasDPadRightButton, () => _gameFacade.HasDPad = true },
+                { cap => cap.HasRightTrigger, () => _gameFacade.HasRightTrigger = true },
+                { cap => cap.HasLeftTrigger, () => _gameFacade.HasLeftTrigger = true },
+                { cap => cap.HasLeftShoulderButton, () => _gameFacade.HasLeftBumper = true },
+                { cap => cap.HasRightShoulderButton, () => _gameFacade.HasRightBumper = true },
+                { cap => cap.HasAButton, () => _gameFacade.HasAButton = true },
+                { cap => cap.HasBButton, () => _gameFacade.HasBButton = true },
+                { cap => cap.HasXButton, () => _gameFacade.HasXButton = true },
+                { cap => cap.HasYButton, () => _gameFacade.HasYButton = true },
+                { cap => cap.HasStartButton, () => _gameFacade.HasStartButton = true },
+                { cap => cap.HasBackButton, () => _gameFacade.HasBackButton = true }
+            };
+
+            foreach (var mapping in capabilityMappings.
+                         Where(mapping => mapping.Key(capabilities)))
+            {
+                mapping.Value();
+            }
+        }
+        
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed
@@ -47,6 +83,7 @@ namespace MonoZenith
                 Exit();
             }
             
+            HandleControllerSupport();  
             _game.Update(gameTime);
             base.Update(gameTime);
         }

@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using MonoZenith.Components;
 
 namespace MonoZenith;
 
@@ -22,6 +23,22 @@ public class GameFacade
     public int ScreenWidth => this._screenDimensions.Item1;
     public int ScreenHeight => this._screenDimensions.Item2;
     public string WindowTitle => this._windowTitle;
+    
+    // Controller support
+    public bool ControllerConnected { get; set; }
+    public bool HasLeftStick { get; set; }
+    public bool HasRightStick { get; set; }
+    public bool HasDPad { get; set; }
+    public bool HasLeftTrigger { get; set; }
+    public bool HasRightTrigger { get; set; }
+    public bool HasLeftBumper { get; set; }
+    public bool HasRightBumper { get; set; }
+    public bool HasAButton { get; set; }
+    public bool HasBButton { get; set; }
+    public bool HasXButton { get; set; }
+    public bool HasYButton { get; set; }
+    public bool HasStartButton { get; set; }
+    public bool HasBackButton { get; set; }
 
     public GameFacade(SpriteBatch s, GraphicsDeviceManager g, ContentManager content)
     {
