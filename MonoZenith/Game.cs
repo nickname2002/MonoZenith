@@ -17,25 +17,7 @@ public partial class Game
     /* Update game logic. */
     public void Update(GameTime deltaTime)
     {
-        if (ControllerConnected)
-        {
-            GamePadState state = this.GetGamePadState();
-            VibrateController(0.5f, 0.5f);
-            
-            if (state.IsButtonDown((Buttons)DualSenseButtons.Cross))
-            {
-                DebugLog("Jump!");
-            }
-
-            if (HasDPad && HasLeftStick)
-            {
-                if (state.IsButtonDown((Buttons)DualSenseButtons.Right) ||
-                    state.ThumbSticks.Left.X > 0.5f)
-                {
-                    DebugLog("Move right!");
-                }
-            }
-        }
+        
     }
     
     /* Draw objects/backdrop. */
