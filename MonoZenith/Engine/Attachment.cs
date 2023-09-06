@@ -32,8 +32,6 @@ public partial class Game
     public bool HasXButton => _facade.HasXButton;
     public bool HasYButton => _facade.HasYButton;
     
-    // TODO: Implement controller stick support 
-    
     // PlayStation DualSense buttons
     public enum DualSenseButtons
     {
