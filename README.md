@@ -16,6 +16,7 @@ The project is currently in development, and is not yet ready for use in product
   - [Colliders](#colliders)
   - [Timers](#timers)
   - [Particle system](#particle-system)
+  - [Controller support](#controller-support)
   - [Tilemap reading](#tilemap-reading)
 - [Known issues](#known-issues)
 - [Maintenance](#maintenance)
@@ -342,6 +343,56 @@ public class MyParticle : Particle
     {
         // Define particle behavior here
     }
+}
+```
+
+### Controller support
+MonoZenith has built-in support for controllers. Properties and methods for controllers can be found in the `Game` class.
+Before using controller properties/methods, make sure to check whether a controller is connected using the `ControllerConnected` property.
+<br /><br />
+If connected, the state of the controller can be accessed using the `GetGamePadState` method. This method returns a `GamePadState` object,
+which contains information about the state of the controller. The `GamePadState` object can be used to check whether a button is pressed,
+or whether the left or right trigger is pressed. Enumerators are built-in for the PlayStation DualSense and XBOX controller buttons. 
+The `GamePadState` object can also be used to get the position of the left and right thumbsticks.
+<br /><br />
+The controller support has been tested with the PlayStation DualSense controller. The XBOX controller has not been tested yet, 
+but should work. This also applies to the PlayStation DualShock 4 controller. Support for other controllers might be added in the future. 
+
+```csharp
+/* Initialize game vars and load assets. */
+public void Init()
+{
+    
+}
+
+/* Update game logic. */
+public void Update(GameTime deltaTime)
+{
+    if (ControllerConnected)
+    {
+        GamePadState state = this.GetGamePadState();
+        VibrateController(0.5f, 0.5f);
+        
+        if (state.IsButtonDown((Buttons)DualSenseButtons.Cross))
+        {
+            DebugLog("Jump!");
+        }
+
+        if (HasDPad && HasLeftStick)
+        {
+            if (state.IsButtonDown((Buttons)DualSenseButtons.Right) ||
+                state.ThumbSticks.Left.X > 0.5f)
+            {
+                DebugLog("Move right!");
+            }
+        }
+    }
+}
+
+/* Draw objects/backdrop. */
+public void Draw()
+{
+    
 }
 ```
 

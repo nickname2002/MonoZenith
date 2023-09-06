@@ -17,11 +17,23 @@ public partial class Game
     /* Update game logic. */
     public void Update(GameTime deltaTime)
     {
-        foreach (DualSenseButtons button in Enum.GetValues(typeof(DualSenseButtons)))
+        if (ControllerConnected)
         {
-            if (GamePad.GetState(PlayerIndex.One).IsButtonDown((Buttons)button))
+            GamePadState state = this.GetGamePadState();
+            VibrateController(0.5f, 0.5f);
+            
+            if (state.IsButtonDown((Buttons)DualSenseButtons.Cross))
             {
-                Console.WriteLine("Pressed: " + button.ToString());
+                DebugLog("Jump!");
+            }
+
+            if (HasDPad && HasLeftStick)
+            {
+                if (state.IsButtonDown((Buttons)DualSenseButtons.Right) ||
+                    state.ThumbSticks.Left.X > 0.5f)
+                {
+                    DebugLog("Move right!");
+                }
             }
         }
     }

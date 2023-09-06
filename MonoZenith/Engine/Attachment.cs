@@ -10,7 +10,7 @@ public enum MouseButtons { Left, Middle, Right }
 
 public partial class Game
 {
-    readonly GameFacade _facade;
+    private readonly GameFacade _facade;
 
     // Properties
     public Color BackgroundColor => _facade.BackgroundColor;
@@ -32,6 +32,8 @@ public partial class Game
     public bool HasXButton => _facade.HasXButton;
     public bool HasYButton => _facade.HasYButton;
     
+    // TODO: Implement controller stick support 
+    
     // PlayStation DualSense buttons
     public enum DualSenseButtons
     {
@@ -49,6 +51,50 @@ public partial class Game
         R3 = Buttons.RightStick,
         Ps = Buttons.BigButton,
         Touchpad = Buttons.BigButton, // Assuming Touchpad uses the same button as PS
+        Up = Buttons.DPadUp,
+        Down = Buttons.DPadDown,
+        Left = Buttons.DPadLeft,
+        Right = Buttons.DPadRight
+    }
+    
+    // XBOX Controller buttons
+    public enum XboxButtons
+    {
+        A = Buttons.A,
+        B = Buttons.B,
+        X = Buttons.X,
+        Y = Buttons.Y,
+        L1 = Buttons.LeftShoulder,
+        R1 = Buttons.RightShoulder,
+        L2 = Buttons.LeftTrigger,
+        R2 = Buttons.RightTrigger,
+        Back = Buttons.Back,
+        Start = Buttons.Start,
+        L3 = Buttons.LeftStick,
+        R3 = Buttons.RightStick,
+        Xbox = Buttons.BigButton,
+        Up = Buttons.DPadUp,
+        Down = Buttons.DPadDown,
+        Left = Buttons.DPadLeft,
+        Right = Buttons.DPadRight
+    }
+    
+    // Nintendo Switch Pro Controller buttons
+    public enum SwitchProButtons
+    {
+        B = Buttons.A,
+        A = Buttons.B,
+        Y = Buttons.X,
+        X = Buttons.Y,
+        L = Buttons.LeftShoulder,
+        R = Buttons.RightShoulder,
+        ZL = Buttons.LeftTrigger,
+        ZR = Buttons.RightTrigger,
+        Minus = Buttons.Back,
+        Plus = Buttons.Start,
+        L3 = Buttons.LeftStick,
+        R3 = Buttons.RightStick,
+        Home = Buttons.BigButton,
         Up = Buttons.DPadUp,
         Down = Buttons.DPadDown,
         Left = Buttons.DPadLeft,
@@ -238,21 +284,28 @@ public partial class Game
     /// </summary>
     private void LogPressedDualSenseButton()
     {
-        GamePadState currentState = GamePad.GetState(PlayerIndex.One);
-
-        if (currentState.IsConnected)
+        foreach (DualSenseButtons button in Enum.GetValues(typeof(DualSenseButtons)))
         {
-            foreach (DualSenseButtons button in Enum.GetValues(typeof(DualSenseButtons)))
+            if (GamePad.GetState(PlayerIndex.One).IsButtonDown((Buttons)button))
             {
-                if (currentState.IsButtonDown((Buttons)button))
-                {
-                    Console.WriteLine("Pressed: " + button.ToString());
-                }
+                Console.WriteLine("Pressed: " + button.ToString());
             }
         }
-        else
+    }
+
+    /// <summary>
+    /// Vibrate the controller. 
+    /// </summary>
+    /// <param name="leftMotor">Left motor in controller</param>
+    /// <param name="rightMotor">Right motor in controller</param>
+    public void VibrateController(float leftMotor, float rightMotor)
+    {
+        if (!ControllerConnected)
         {
-            Console.WriteLine("DualSense controller is not connected.");
+            DebugLog("Controller not connected.");
+            return;
         }
+        
+        GamePad.SetVibration(PlayerIndex.One, leftMotor, rightMotor);
     }
 }
