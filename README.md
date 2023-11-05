@@ -18,6 +18,7 @@
 - Collision detection.
 - Timers and particle system.
 - Controller support.
+- Tilemap reading.
 
 ## Known Issues
 
