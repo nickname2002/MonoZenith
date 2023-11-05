@@ -31,7 +31,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="bin\Debug\net6.0\Content\Audio\placeholder.txt" />
+    <Content Include="bin\Debug\net6.0\Content\Textures\map.png" />
     <Content Include="bin\Debug\net6.0\Content\Textures\placeholder.txt" />
+    <Content Include="bin\Debug\net6.0\Content\Textures\tilemap.png" />
   </ItemGroup>
   <Target Name="RestoreDotnetTools" BeforeTargets="Restore">
     <Message Text="Restoring dotnet tools" Importance="High" />

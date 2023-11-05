@@ -143,11 +143,39 @@ public class GameFacade
         Rectangle rect = new Rectangle((int)pos.X - width / 2, (int)pos.Y - height / 2, width, height);
         _spriteBatch.Draw(pixel, rect, color);
     }
-
+    
     public SoundEffectInstance LoadAudio(string filePath)
     {
         using var stream = File.OpenRead("Content/" + filePath);
         var soundEffect = SoundEffect.FromStream(stream);
         return soundEffect.CreateInstance();
+    }
+
+    public Texture2D ReadTileMap(string filePath)
+    {
+        return LoadImage(filePath);
+    }
+
+    public Texture2D ReadTileFromMap(Texture2D tileMap, int tileCode, int tileSize)
+    {
+        // Get the tile's position in the tilemap
+        int tileX = tileCode % (tileMap.Width / tileSize);
+        int tileY = tileCode / (tileMap.Width / tileSize);
+        
+        // Create a new texture to hold the tile
+        Texture2D tile = new Texture2D(_graphicsDeviceManager.GraphicsDevice, tileSize, tileSize);
+        
+        // Copy the tile from the tilemap to the new texture
+        Color[] data = new Color[tileSize * tileSize];
+        tileMap.GetData(0, new Rectangle(
+            tileX * tileSize, 
+            tileY * tileSize, 
+            tileSize, tileSize), 
+            data, 
+            0, 
+            tileSize * tileSize);
+        tile.SetData(data);
+        
+        return tile;
     }
 }

@@ -306,4 +306,21 @@ public partial class Game
         
         GamePad.SetVibration(PlayerIndex.One, leftMotor, rightMotor);
     }
+    
+    public Texture2D ReadTileMap(string filepath)
+    {
+        return _facade.ReadTileMap(filepath);
+    }
+    
+    /// <summary>
+    /// Read tile from tilemap.
+    /// </summary>
+    /// <param name="tileMap">Tilemap to read from.</param>
+    /// <param name="tileCode">Code of the tile to retrieve.</param>
+    /// <param name="tileSize">Size of te tile to retrieve.</param>
+    /// <returns>Texture of the tile.</returns>
+    public Texture2D ReadTileFromMap(Texture2D tileMap, int tileCode, int tileSize)
+    {
+        return _facade.ReadTileFromMap(tileMap, tileCode, tileSize);
+    }
 }
