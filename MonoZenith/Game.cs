@@ -15,7 +15,15 @@ public partial class Game
     {
         SetScreenSize(800, 600);
         SetBackgroundColor(Color.White);
-        _textField = new TextField(this, new Vector2(400, 300), 200, 100, 15);
+        
+        // Create text field
+        _textField = new TextField(this, new Vector2(400, 300), 210, 50, 1)
+        {
+            BackColor = Color.DarkGray,
+            ContentColor = Color.White,
+            BorderColor = Color.DimGray,
+            MaxLength = 20
+        };
     }
 
     /* Update game logic. */

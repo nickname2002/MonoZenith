@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
@@ -7,39 +8,47 @@ namespace MonoZenith.Components;
 public class TextField : Component
 {
     private float _currentTypeCooldown;
-    private float _typeCooldown;
-    private string _content;
-    private bool _selected;
-    private int _fontSize;
-    public bool Selected => _selected;
-    public string Content => _content;
-    public int MaxLength { get; set; }
+    private readonly float _typeCooldown;
+    private readonly int _fontScale;
     
-    public TextField(Game g, Vector2 pos, int width, int height, int fontSize) : 
+    public bool Selected { get; private set; }
+    public string Content { get; private set; }
+    public int MaxLength { get; set; }
+    public Color ContentColor { get; set;  }
+    public Color BackColor { get; set; }
+    public int BorderWidth { get; set; }
+    public Color BorderColor { get; set; }
+    
+    public TextField(Game g, Vector2 pos, int width, int height, int fontScale) : 
         base(g, pos, width, height)
     {
-        _content = "";
-        _selected = false;
-        _typeCooldown = 8;
+        Content = "";
+        Selected = false;
+        _typeCooldown = 6;
         _currentTypeCooldown = 0;
+        _fontScale = fontScale;
         MaxLength = 20;
+        BorderWidth = 3;
+        BorderColor = Color.DimGray;
+        ContentColor = Color.White;
+        BackColor = Color.DarkGray;
     }
 
+    [SuppressMessage("ReSharper", "PossibleLossOfFraction")]
     private bool IsHovered()
     {
-        Point mousePos = Game.GetMousePosition();
+        var mousePos = Game.GetMousePosition();
 
         // In X range
-        if (mousePos.X > Position.X - Width / 2 && mousePos.X < Position.X + Width / 2)
+        if (!(mousePos.X > Position.X - Width / 2 - BorderWidth) ||
+            !(mousePos.X < Position.X + Width / 2 + BorderWidth))
         {
-            // In Y range
-            if (mousePos.Y > Position.Y - Height / 2 && mousePos.Y < Position.Y + Height / 2)
-            {
-                return true;
-            }
+            return false;
         }
 
-        return false;
+        // In Y range
+        return mousePos.Y > Position.Y - Height / 2 - BorderWidth && 
+               mousePos.Y < Position.Y + Height / 2 + BorderWidth;
     }
     
     private bool IsClicked()
@@ -47,74 +56,156 @@ public class TextField : Component
         return IsHovered() && Game.GetMouseButtonDown(MouseButtons.Left);
     }
 
+    /// <summary>
+    /// Toggles the selected state of the text field.
+    /// </summary>
     private void ToggleSelected()
     {
-        if (IsClicked() && !_selected)
+        if (IsClicked() && !Selected)
         {
-            _selected = true;
+            Selected = true;
         }
-        else if (Game.GetMouseButtonDown(MouseButtons.Left) && !IsClicked() && _selected)
+        else if (Game.GetMouseButtonDown(MouseButtons.Left) && !IsClicked() && Selected)
         {
-            _selected = false;
+            Selected = false;
         }
     }
 
+    /// <summary>
+    /// Gets the content to add to the text field.
+    /// </summary>
+    /// <param name="key">The key that is pressed.</param>
+    /// <returns>The content to add to the text field.</returns>
+    private static char ContentToAdd(Keys key)
+    {
+        switch (key.ToString().Length)
+        {
+            // Handle letters
+            case 1:
+                return char.Parse(key.ToString());
+            
+            // Handle numbers
+            case 2 when key.ToString()[0] == 'D':
+                return key.ToString()[1];
+        }
+
+        // Handle keys that are not letters or numbers
+        if (key is Keys.LeftShift or Keys.RightShift or Keys.LeftControl or Keys.RightControl)
+        {
+            return ' ';
+        }
+        
+        // Handle special characters
+        return key switch
+        {
+            Keys.Add => '+',
+            Keys.Subtract => '-',
+            Keys.Multiply => '*',
+            Keys.Divide => '/',
+            Keys.OemBackslash => '\\',
+            Keys.OemComma => ',',
+            Keys.OemPeriod => '.',
+            Keys.OemQuestion => '?',
+            Keys.OemQuotes => '\'',
+            Keys.OemSemicolon => ';',
+            Keys.OemTilde => '~',
+            Keys.OemOpenBrackets => '(',
+            Keys.OemCloseBrackets => ')',
+            Keys.OemPipe => '|',
+            _ => ' '
+        };
+    }
+    
+    /// <summary>
+    /// Adds/removed content from the text field.
+    /// </summary>
     private void ManageContent()
     {
-        KeyboardState keyboardState = Keyboard.GetState();
-        
-        // TODO: From key name to character
-        // TODO: Refactoring work for aesthetics and readability
-        
-        if (keyboardState.GetPressedKeys().Length > 0 && 
-            keyboardState.GetPressedKeys()[0].ToString().Length == 1 &&
-            _content.Length < MaxLength)
+        var keyboardState = Keyboard.GetState();
+
+        if (IsValidKeyInput(keyboardState))
         {
-            _content += keyboardState.GetPressedKeys()[0].ToString();
+            Content += ContentToAdd(keyboardState.GetPressedKeys()[0]);
             _currentTypeCooldown = _typeCooldown;
         }
-        else if (Game.GetKeyDown(Keys.Space) && _content.Length < MaxLength)
+        else if (IsValidSpaceInput())
         {
-            _content += " ";
+            Content += " ";
             _currentTypeCooldown = _typeCooldown;
         }
-        else if (Game.GetKeyDown(Keys.Back))
+        else if (IsValidBackspaceInput())
         {
-            if (_content.Length <= 0) 
-                return;
-            
-            _content = _content.Remove(_content.Length - 1);
-            _currentTypeCooldown = _typeCooldown;
+            HandleBackspace();
         }
+    }
+    
+    private bool IsValidKeyInput(KeyboardState keyboardState)
+    {
+        return keyboardState.GetPressedKeys().Length > 0 &&
+               !Game.GetKeyDown(Keys.Space) &&
+               !Game.GetKeyDown(Keys.Back) &&
+               Content.Length < MaxLength;
+    }
+
+    private bool IsValidSpaceInput()
+    {
+        return Game.GetKeyDown(Keys.Space) && Content.Length < MaxLength;
+    }
+
+    private bool IsValidBackspaceInput()
+    {
+        return Game.GetKeyDown(Keys.Back);
+    }
+
+    private void HandleBackspace()
+    {
+        if (Content.Length <= 0)
+        {
+            return;
+        }
+
+        Content = Content.Remove(Content.Length - 1);
+        _currentTypeCooldown = _typeCooldown;
     }
     
     public override void Update(GameTime deltaTime)
     {
         ToggleSelected();
         
-        if (_selected && _currentTypeCooldown <= 0)
+        // Add content to text field
+        if (Selected && _currentTypeCooldown <= 0)
         {
             ManageContent();
         }
+        // Update cooldown timer
         else if (_currentTypeCooldown > 0)
         {
             _currentTypeCooldown -= 1;
         }
-        
-        Console.WriteLine(_content);
     }
 
     public override void Draw()
     {
-        if (_selected)
+        // Draw border
+        Game.DrawRectangle(BorderColor, Position, Width + BorderWidth * 2, Height + BorderWidth * 2);
+
+        // Draw background
+        if (Selected)
         {
-            Game.DrawRectangle(Color.DarkGray, Position, Width, Height);
+            var selectedColor = new Color(BackColor.R + 20, BackColor.G + 20, BackColor.B + 20);
+            Game.DrawRectangle(selectedColor, Position, Width, Height);
+        }
+        else if (IsHovered())
+        {
+            var hoverColor = new Color(BackColor.R + 20, BackColor.G + 20, BackColor.B + 20);
+            Game.DrawRectangle(hoverColor, Position, Width, Height);
         }
         else
         {
-            Game.DrawRectangle(Color.Gray, Position, Width, Height);
+            Game.DrawRectangle(BackColor, Position, Width, Height);
         }
         
-        Game.DrawText(_content, Position, Game.LoadFont("pixel"), Color.Black, 1);
+        // Draw content
+        Game.DrawText(Content, Position, Game.LoadFont("pixel"), ContentColor, _fontScale);
     }
 }
