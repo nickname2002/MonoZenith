@@ -112,6 +112,7 @@ public class TextField : Component
             Keys.OemOpenBrackets => '(',
             Keys.OemCloseBrackets => ')',
             Keys.OemPipe => '|',
+            Keys.OemEnlW => '!',
             _ => ' '
         };
     }
@@ -206,6 +207,13 @@ public class TextField : Component
         }
         
         // Draw content
-        Game.DrawText(Content, Position, Game.LoadFont("pixel"), ContentColor, _fontScale);
+        if (Selected)
+        {
+            Game.DrawText(Content + "|", Position, Game.LoadFont("pixel"), ContentColor, _fontScale);
+        }
+        else
+        {
+            Game.DrawText(Content, Position, Game.LoadFont("pixel"), ContentColor, _fontScale);
+        }
     }
 }
