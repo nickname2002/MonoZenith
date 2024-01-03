@@ -4,6 +4,13 @@
 
 <img src="https://github.com/nickname2002/MonoZenith/blob/main/MonoZenith/Content/Images/monozenith.png?raw=true" width="600" />
 
+## Table of Contents
+1. [Getting Started](#getting-started)
+2. [Features](#features)
+3. [Known Issues](#known-issues)
+4. [References](#references)
+5. [Maintenance](#maintenance)
+
 ## Getting Started
 
 1. Download the project from GitHub or fork it and clone to your local machine.
@@ -24,6 +31,10 @@
 
 - Limited font choices.
 - Assets must be placed in the `Content` folder within `bin`.
+
+## References
+- [MonoGame](https://monogame.net)
+- [SpriteFontPlus](https://github.com/rds1983/SpriteFontPlus)
 
 ## Maintenance
 
