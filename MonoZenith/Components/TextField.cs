@@ -209,11 +209,16 @@ public class TextField : Component
         // Draw content
         if (Selected)
         {
-            Game.DrawText(Content + "|", Position, Game.LoadFont("pixel"), ContentColor, _fontScale);
+            Game.DrawText(
+                Content + "|", 
+                Position, 
+                Game.LoadFont("Fonts/pixel.ttf", 1), 
+                ContentColor, 
+                _fontScale);
         }
         else
         {
-            Game.DrawText(Content, Position, Game.LoadFont("pixel"), ContentColor, _fontScale);
+            Game.DrawText(Content, Position, Game.LoadFont("Fonts/pixel.ttf", 1), ContentColor, _fontScale);
         }
     }
 }

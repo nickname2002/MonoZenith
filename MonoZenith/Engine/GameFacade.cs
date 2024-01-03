@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
@@ -5,6 +6,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MonoZenith.Components;
+using SpriteFontPlus;
 
 namespace MonoZenith;
 
@@ -99,9 +101,23 @@ public class GameFacade
         return mouseSate.ScrollWheelValue;
     }
     
-    public SpriteFont LoadFont(string font)
+    public SpriteFont LoadFont(string filePath, int scale)
     {
-        return _content.Load<SpriteFont>($"Fonts/{font}");
+        string correctedPath = "../../../Content/" + filePath;
+        var fontBakeResult = TtfFontBaker.Bake(File.ReadAllBytes(correctedPath),
+            25 * scale,
+            1024,
+            1024,
+            new[]
+            {
+                CharacterRange.BasicLatin,
+                CharacterRange.Latin1Supplement,
+                CharacterRange.LatinExtendedA,
+                CharacterRange.Cyrillic
+            }
+        );
+
+        return fontBakeResult.CreateSpriteFont(_graphicsDeviceManager.GraphicsDevice);
     }
     
     public void DrawText(string content, Vector2 pos, SpriteFont font, Color c, float scale=1, float angle=0)
@@ -114,7 +130,7 @@ public class GameFacade
     /* Source: https://community.monogame.net/t/loading-png-jpg-etc-directly/7403 */
     public Texture2D LoadImage(string filepath)
     {
-        FileStream fs = new FileStream($"Content/{filepath}", FileMode.Open);
+        FileStream fs = new FileStream($"../../../Content/{filepath}", FileMode.Open);
         Texture2D spriteAtlas = Texture2D.FromStream(_graphicsDeviceManager.GraphicsDevice, fs);
         fs.Dispose();
         return spriteAtlas;
@@ -146,7 +162,7 @@ public class GameFacade
 
     public SoundEffectInstance LoadAudio(string filePath)
     {
-        using var stream = File.OpenRead("Content/" + filePath);
+        using var stream = File.OpenRead("../../../Content/" + filePath);
         var soundEffect = SoundEffect.FromStream(stream);
         return soundEffect.CreateInstance();
     }

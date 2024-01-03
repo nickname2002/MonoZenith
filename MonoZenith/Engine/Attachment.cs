@@ -183,10 +183,11 @@ public partial class Game
     /// Load a font.
     /// </summary>
     /// <param name="font">Name of the font to be loaded.</param>
+    /// <param name="scale">Scale of the font.</param>
     /// <returns>The SpriteFont of the requested font.</returns>
-    public SpriteFont LoadFont(string font)
+    public SpriteFont LoadFont(string font, int scale)
     {
-        return _facade.LoadFont(font);
+        return _facade.LoadFont(font, scale);
     }
 
     /// <summary>
