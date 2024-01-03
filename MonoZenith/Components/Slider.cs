@@ -38,7 +38,7 @@ public class Slider : Component
         TextColor = Color.Black;
         
         _sliding = false;
-        _font = g.LoadFont("pixel");
+        _font = g.LoadFont("Fonts/pixel.ttf", 1);
     }
 
     /* Check if mouse is hovering over slider. */
