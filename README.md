@@ -2,7 +2,7 @@
 
 **MonoZenith** is a lightweight MonoGame wrapper designed to streamline game development using C#. It simplifies game development by providing abstractions and helper methods, allowing developers to focus on creating engaging gameplay experiences.
 
-<img src="https://github.com/nickname2002/MonoZenith/blob/main/MonoZenith/bin/Debug/net6.0/Content/Textures/MONOZENITH.png?raw=true" width="600" />
+<img src="https://github.com/nickname2002/MonoZenith/blob/main/MonoZenith/Content/Images/monozenith.png?raw=true" width="600" />
 
 ## Getting Started
 
