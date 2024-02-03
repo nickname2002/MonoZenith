@@ -137,7 +137,13 @@ public class GameFacade
     }
     
     /* Source: https://www.industrian.net/tutorials/texture2d-and-drawing-sprites/ */
-    public void DrawImage(Texture2D texture, Vector2 pos, float scale=1, float angle=0, bool flipped=false)
+    public void DrawImage(
+        Texture2D texture, 
+        Vector2 pos, 
+        float scale=1, 
+        float angle=0, 
+        bool flipped=false, 
+        float alpha=1.0f)
     {
         float rotationAngle = MathHelper.ToRadians(angle);
     
@@ -149,7 +155,14 @@ public class GameFacade
         if (flipped)
             effect = SpriteEffects.FlipHorizontally;
     
-        _spriteBatch.Draw(texture, pos, null, Color.White, rotationAngle, origin, scale, effect, 0);
+        _spriteBatch.Draw(
+            texture, 
+            pos, 
+            null, 
+            new Color(Color.White, alpha), 
+            rotationAngle, 
+            origin, scale, 
+            effect, 0);
     }
     
     public void DrawRectangle(Color color, Vector2 pos, int width, int height)

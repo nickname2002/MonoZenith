@@ -79,15 +79,24 @@ namespace MonoZenith
         private void ShowSplashScreen()
         {
             Texture2D splashScreen = _game.LoadImage("Images/monozenith.png");
-            float scale = (float)_game.ScreenWidth / splashScreen.Width * 0.75f;
+            float scale = (float)_game.ScreenWidth / splashScreen.Width * 0.6f;
             scale += (1 - splashScreenTimer / 3000) / 10;
-
-            // TODO: Fade in and out
             
+            // Fade in slowly
+            float alpha = 1;
+            if (splashScreenTimer > 2000)
+            {
+                alpha = 1 - (splashScreenTimer - 2000) / 1000;
+            }
+            
+            // Draw splash screen
             _game.DrawImage(
                 splashScreen, 
                 new Vector2(_game.ScreenWidth / 2, _game.ScreenHeight / 2),
-                scale);
+                scale,
+                0, 
+                false, 
+                alpha);
         }
         
         protected override void Update(GameTime gameTime)

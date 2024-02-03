@@ -224,9 +224,16 @@ public partial class Game
     /// <param name="scale">Scale</param>
     /// <param name="angle">Rotational angle</param>
     /// <param name="flipped">Horizontally flipped</param>
-    public void DrawImage(Texture2D texture, Vector2 pos, float scale=1, float angle=0, bool flipped=false)
+    /// <param name="alpha">Alpha</param>
+    public void DrawImage(
+        Texture2D texture, 
+        Vector2 pos, 
+        float scale=1, 
+        float angle=0, 
+        bool flipped=false, 
+        float alpha=1.0f)
     {
-        _facade.DrawImage(texture, pos, scale, angle, flipped);
+        _facade.DrawImage(texture, pos, scale, angle, flipped, alpha);
     }
     
     /// <summary>
