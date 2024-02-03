@@ -14,6 +14,7 @@ namespace MonoZenith
         private SpriteBatch _spriteBatch;
         private GameFacade _gameFacade;
         private Game _game;
+        private float splashScreenTimer = 3000;
 
         public Engine()
         {
@@ -75,8 +76,28 @@ namespace MonoZenith
             }
         }
         
+        private void ShowSplashScreen()
+        {
+            Texture2D splashScreen = _game.LoadImage("Images/monozenith.png");
+            float scale = (float)_game.ScreenWidth / splashScreen.Width * 0.75f;
+            scale += (1 - splashScreenTimer / 3000) / 10;
+
+            // TODO: Fade in and out
+            
+            _game.DrawImage(
+                splashScreen, 
+                new Vector2(_game.ScreenWidth / 2, _game.ScreenHeight / 2),
+                scale);
+        }
+        
         protected override void Update(GameTime gameTime)
         {
+            if (splashScreenTimer > 0)
+            {
+                splashScreenTimer -= gameTime.ElapsedGameTime.Milliseconds;
+                return;
+            }
+            
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed
                 || Keyboard.GetState().IsKeyDown(Keys.Escape))
             {
@@ -90,8 +111,16 @@ namespace MonoZenith
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(_game.BackgroundColor);
+            GraphicsDevice.Clear(splashScreenTimer > 0 ? Color.White : _game.BackgroundColor);
             _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
+            
+            if (splashScreenTimer > 0)
+            {
+                ShowSplashScreen();
+                _spriteBatch.End();
+                return;
+            }
+            
             _game.Draw();
             _spriteBatch.End();
             base.Draw(gameTime);

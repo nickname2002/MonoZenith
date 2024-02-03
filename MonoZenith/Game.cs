@@ -11,7 +11,8 @@ public partial class Game
     /* Initialize game vars and load assets. */
     public void Init()
     {
-        
+        SetBackgroundColor(Color.Red);
+        SetScreenSize(800, 600);
     }
 
     /* Update game logic. */
