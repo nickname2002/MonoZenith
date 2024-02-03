@@ -2,7 +2,14 @@
 
 **MonoZenith** is a lightweight MonoGame wrapper designed to streamline game development using C#. It simplifies game development by providing abstractions and helper methods, allowing developers to focus on creating engaging gameplay experiences.
 
-<img src="https://github.com/nickname2002/MonoZenith/blob/main/MonoZenith/bin/Debug/net6.0/Content/Textures/MONOZENITH.png?raw=true" width="600" />
+<img src="https://github.com/nickname2002/MonoZenith/blob/main/MonoZenith/Content/Images/monozenith.png?raw=true" width="600" />
+
+## Table of Contents
+1. [Getting Started](#getting-started)
+2. [Features](#features)
+3. [Known Issues](#known-issues)
+4. [References](#references)
+5. [Maintenance](#maintenance)
 
 ## Getting Started
 
@@ -24,6 +31,10 @@
 
 - Limited font choices.
 - Assets must be placed in the `Content` folder within `bin`.
+
+## References
+- [MonoGame](https://monogame.net)
+- [SpriteFontPlus](https://github.com/rds1983/SpriteFontPlus)
 
 ## Maintenance
 
