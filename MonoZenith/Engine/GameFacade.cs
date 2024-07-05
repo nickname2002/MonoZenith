@@ -103,7 +103,8 @@ public class GameFacade
     
     public SpriteFont LoadFont(string filePath, int scale)
     {
-        string correctedPath = "../../../Content/" + filePath;
+        string rootPath = Environment.CurrentDirectory;
+        string correctedPath = $"{rootPath}/Content/" + filePath;
         var fontBakeResult = TtfFontBaker.Bake(File.ReadAllBytes(correctedPath),
             25 * scale,
             1024,
@@ -130,7 +131,8 @@ public class GameFacade
     /* Source: https://community.monogame.net/t/loading-png-jpg-etc-directly/7403 */
     public Texture2D LoadImage(string filepath)
     {
-        FileStream fs = new FileStream($"../../../Content/{filepath}", FileMode.Open);
+        string rootPath = Environment.CurrentDirectory;
+        FileStream fs = new FileStream($"{rootPath}/Content/{filepath}", FileMode.Open);
         Texture2D spriteAtlas = Texture2D.FromStream(_graphicsDeviceManager.GraphicsDevice, fs);
         fs.Dispose();
         return spriteAtlas;
@@ -175,7 +177,9 @@ public class GameFacade
 
     public SoundEffectInstance LoadAudio(string filePath)
     {
-        using var stream = File.OpenRead("../../../Content/" + filePath);
+        // Get project root directory
+        string rootPath = Environment.CurrentDirectory;
+        using var stream = File.OpenRead($"{rootPath}/Content/" + filePath);
         var soundEffect = SoundEffect.FromStream(stream);
         return soundEffect.CreateInstance();
     }
