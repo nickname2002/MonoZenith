@@ -10,7 +10,7 @@ public abstract class Component
     protected int Width;
     protected int Height;
     
-    protected Component(Game g, Vector2 pos, int width, int height)
+    protected Component(MonoZenith.Game g, Vector2 pos, int width, int height)
     {
         this.Game = g;
         this.Position = pos;

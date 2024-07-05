@@ -5,8 +5,9 @@ using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using MonoZenith.Engine.Support;
 
-namespace MonoZenith
+namespace MonoZenith.Engine
 {
     public class Engine : Microsoft.Xna.Framework.Game
     {
@@ -14,7 +15,7 @@ namespace MonoZenith
         private SpriteBatch _spriteBatch;
         private GameFacade _gameFacade;
         private Game _game;
-        private float splashScreenTimer = 3000;
+        private float _splashScreenTimer = 3000;
 
         public Engine()
         {
@@ -41,6 +42,9 @@ namespace MonoZenith
             _graphics.PreferredBackBufferHeight = _game.ScreenHeight;
             _graphics.ApplyChanges();
             Window.Title = _game.WindowTitle;
+            
+            // Load content
+            DataManager.GetInstance(_game);
         }
 
         private void HandleControllerSupport()
@@ -78,15 +82,15 @@ namespace MonoZenith
         
         private void ShowSplashScreen()
         {
-            Texture2D splashScreen = _game.LoadImage("Images/monozenith.png");
+            Texture2D splashScreen = DataManager.GetInstance(_game).MonoZenithLogo;
             float scale = (float)_game.ScreenWidth / splashScreen.Width * 0.6f;
-            scale += (1 - splashScreenTimer / 3000) / 10;
+            scale += (1 - _splashScreenTimer / 3000) / 10;
             
             // Fade in slowly
             float alpha = 1;
-            if (splashScreenTimer > 2000)
+            if (_splashScreenTimer > 2000)
             {
-                alpha = 1 - (splashScreenTimer - 2000) / 1000;
+                alpha = 1 - (_splashScreenTimer - 2000) / 1000;
             }
             
             // Draw splash screen
@@ -101,9 +105,9 @@ namespace MonoZenith
         
         protected override void Update(GameTime gameTime)
         {
-            if (splashScreenTimer > 0)
+            if (_splashScreenTimer > 0)
             {
-                splashScreenTimer -= gameTime.ElapsedGameTime.Milliseconds;
+                _splashScreenTimer -= gameTime.ElapsedGameTime.Milliseconds;
                 return;
             }
             
@@ -120,10 +124,10 @@ namespace MonoZenith
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(splashScreenTimer > 0 ? Color.White : _game.BackgroundColor);
+            GraphicsDevice.Clear(_splashScreenTimer > 0 ? Color.White : _game.BackgroundColor);
             _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
             
-            if (splashScreenTimer > 0)
+            if (_splashScreenTimer > 0)
             {
                 ShowSplashScreen();
                 _spriteBatch.End();
