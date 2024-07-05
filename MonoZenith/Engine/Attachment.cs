@@ -12,13 +12,11 @@ public partial class Game
 {
     private readonly GameFacade _facade;
 
-    // Properties
     public Color BackgroundColor => _facade.BackgroundColor;
     public int ScreenWidth => _facade.ScreenWidth;
     public int ScreenHeight => _facade.ScreenHeight;
     public string WindowTitle => _facade.WindowTitle;
     
-    // Controller support
     public bool ControllerConnected => _facade.ControllerConnected;
     public bool HasLeftStick => _facade.HasLeftStick;
     public bool HasRightStick => _facade.HasRightStick;

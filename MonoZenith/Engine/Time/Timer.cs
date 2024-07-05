@@ -16,6 +16,10 @@ public class Timer
         _index = index;
     }
 
+    /// <summary>
+    /// Update the timer.
+    /// </summary>
+    /// <param name="gameTime">The game time.</param>
     public void Update(GameTime gameTime)
     {
         if (_milliSeconds <= 0)
@@ -24,11 +28,18 @@ public class Timer
         _milliSeconds -= gameTime.ElapsedGameTime.Milliseconds;
     }
     
+    /// <summary>
+    /// Check if the timer has run out.
+    /// </summary>
+    /// <returns>Whether the timer has run out.</returns>
     public bool TimerOver()
     {
         return _milliSeconds <= 0;
     }
     
+    /// <summary>
+    /// Reset the timer.
+    /// </summary>
     public void ResetTimer()
     {
         _milliSeconds = OriginalMilliSeconds;

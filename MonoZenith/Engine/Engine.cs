@@ -23,6 +23,9 @@ namespace MonoZenith
             IsMouseVisible = true;
         }
 
+        /// <summary>
+        /// Initialize the game.
+        /// </summary>
         protected override void Initialize()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
@@ -31,6 +34,9 @@ namespace MonoZenith
             base.Initialize();
         }
 
+        /// <summary>
+        /// Load game content.
+        /// </summary>
         protected override void LoadContent()
         {
             _game.Init();
@@ -43,6 +49,9 @@ namespace MonoZenith
             Window.Title = _game.WindowTitle;
         }
 
+        /// <summary>
+        /// Handle controller support.
+        /// </summary>
         private void HandleControllerSupport()
         {
             GamePadCapabilities capabilities = GamePad.GetCapabilities(PlayerIndex.One);
@@ -76,6 +85,9 @@ namespace MonoZenith
             }
         }
         
+        /// <summary>
+        /// Show splash screen.
+        /// </summary>
         private void ShowSplashScreen()
         {
             Texture2D splashScreen = _game.LoadImage("Images/monozenith.png");
@@ -99,6 +111,10 @@ namespace MonoZenith
                 alpha);
         }
         
+        /// <summary>
+        /// Update the game.
+        /// </summary>
+        /// <param name="gameTime"></param>
         protected override void Update(GameTime gameTime)
         {
             if (splashScreenTimer > 0)
@@ -118,6 +134,10 @@ namespace MonoZenith
             base.Update(gameTime);
         }
 
+        /// <summary>
+        /// Draw the game.
+        /// </summary>
+        /// <param name="gameTime">Game time.</param>
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(splashScreenTimer > 0 ? Color.White : _game.BackgroundColor);
