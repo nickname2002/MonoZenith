@@ -2,11 +2,13 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using MonoZenith.Engine.Support;
 
 namespace MonoZenith.Components;
 
 public class TextField : Component
 {
+    private Game _game;
     private float _currentTypeCooldown;
     private readonly float _typeCooldown;
     private readonly int _fontScale;
@@ -22,6 +24,7 @@ public class TextField : Component
     public TextField(Game g, Vector2 pos, int width, int height, int fontScale) : 
         base(g, pos, width, height)
     {
+        _game = g;
         Content = "";
         Selected = false;
         _typeCooldown = 6;
@@ -210,15 +213,20 @@ public class TextField : Component
         if (Selected)
         {
             Game.DrawText(
-                Content + "|", 
-                Position, 
-                Game.LoadFont("Fonts/pixel.ttf", 1), 
+                Content + "|",
+                Position,
+                DataManager.GetInstance(_game).ComponentFont,
                 ContentColor, 
                 _fontScale);
         }
         else
         {
-            Game.DrawText(Content, Position, Game.LoadFont("Fonts/pixel.ttf", 1), ContentColor, _fontScale);
+            Game.DrawText(
+                Content, 
+                Position,
+                DataManager.GetInstance(_game).ComponentFont, 
+                ContentColor, 
+                _fontScale);
         }
     }
 }

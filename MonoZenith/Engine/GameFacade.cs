@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Input;
 using MonoZenith.Components;
 using SpriteFontPlus;
 
-namespace MonoZenith;
+namespace MonoZenith.Engine;
 
 public class GameFacade
 {

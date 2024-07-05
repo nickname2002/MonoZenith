@@ -1,3 +1,3 @@
 ﻿
-using var game = new MonoZenith.Engine();
+using var game = new MonoZenith.Engine.Engine();
 game.Run();
