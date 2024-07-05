@@ -51,6 +51,8 @@ namespace MonoZenith.Engine
             
             // Load content
             DataManager.GetInstance(_game);
+            ParticleManager.GetInstance(_game);
+            TimerManager.GetInstance();
         }
 
         /// <summary>
@@ -135,6 +137,7 @@ namespace MonoZenith.Engine
             
             HandleControllerSupport();
             TimerManager.Update(gameTime);
+            ParticleManager.Update(gameTime);
             _game.Update(gameTime);
             base.Update(gameTime);
         }
@@ -158,6 +161,7 @@ namespace MonoZenith.Engine
             _game.Draw();
             _spriteBatch.End();
             base.Draw(gameTime);
+            ParticleManager.Draw();
         }
     }
 }

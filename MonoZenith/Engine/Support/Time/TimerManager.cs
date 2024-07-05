@@ -9,13 +9,25 @@ namespace MonoZenith;
 public class TimerManager
 {
     private static List<Timer> _timers;
-    private TimerManager _instance;
-    
-    public TimerManager Instance => _instance ??= new TimerManager();
+    private static TimerManager _instance;
 
     public TimerManager()
     {
         _timers = new List<Timer>();
+    }
+    
+    /// <summary>
+    /// Get the instance of the timer manager.
+    /// </summary>
+    /// <returns>The timer manager instance.</returns>
+    public static TimerManager GetInstance()
+    {
+        if (_instance == null)
+        {
+            _instance = new TimerManager();
+        }
+        
+        return _instance;
     }
 
     /// <summary>
