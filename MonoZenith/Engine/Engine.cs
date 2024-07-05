@@ -133,7 +133,8 @@ namespace MonoZenith.Engine
                 Exit();
             }
             
-            HandleControllerSupport();  
+            HandleControllerSupport();
+            TimerManager.Update(gameTime);
             _game.Update(gameTime);
             base.Update(gameTime);
         }
