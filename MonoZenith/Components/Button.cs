@@ -1,6 +1,7 @@
 using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoZenith.Engine.Support;
 
 namespace MonoZenith.Components;
 
@@ -43,7 +44,7 @@ public class Button : Component
         _buttonColor = buttonColor;
         _originalButtonColor = _buttonColor;
         _buttonHoverColor = new Color(buttonColor.R + 50, buttonColor.G + 50, buttonColor.B + 50);
-        _font = Game.LoadFont("Fonts/pixel.ttf", 1);
+        _font = DataManager.GetInstance(g).ComponentFont;
         _callbackMethod = () => Game.DebugLog("");
         
         // Border properties 

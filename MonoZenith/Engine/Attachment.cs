@@ -3,7 +3,9 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using MonoZenith.Engine;
 
+// ReSharper disable once CheckNamespace
 namespace MonoZenith;
 
 public enum MouseButtons { Left, Middle, Right }
@@ -183,7 +185,7 @@ public partial class Game
     /// <param name="font">Name of the font to be loaded.</param>
     /// <param name="scale">Scale of the font.</param>
     /// <returns>The SpriteFont of the requested font.</returns>
-    public SpriteFont LoadFont(string font, int scale)
+    public SpriteFont LoadFont(string font, float scale)
     {
         return _facade.LoadFont(font, scale);
     }

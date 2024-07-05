@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Input;
 using MonoZenith.Components;
 using SpriteFontPlus;
 
-namespace MonoZenith;
+namespace MonoZenith.Engine;
 
 public class GameFacade
 {
@@ -131,7 +131,7 @@ public class GameFacade
     /// <param name="filePath">File path to the font.</param>
     /// <param name="scale">Scale of the font.</param>
     /// <returns>The SpriteFont of the requested font.</returns>
-    public SpriteFont LoadFont(string filePath, int scale)
+    public SpriteFont LoadFont(string filePath, float scale)
     {
         string rootPath = Environment.CurrentDirectory;
         string correctedPath = $"{rootPath}/Content/" + filePath;

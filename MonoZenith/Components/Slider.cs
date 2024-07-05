@@ -1,6 +1,7 @@
 using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoZenith.Engine.Support;
 
 namespace MonoZenith.Components;
 
@@ -38,7 +39,7 @@ public class Slider : Component
         TextColor = Color.Black;
         
         _sliding = false;
-        _font = g.LoadFont("Fonts/pixel.ttf", 1);
+        _font = DataManager.GetInstance(g).ComponentFont;
     }
 
     /* Check if mouse is hovering over slider. */

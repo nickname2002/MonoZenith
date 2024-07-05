@@ -28,9 +28,7 @@
 - Tilemap reading.
 
 ## Known Issues
-
-- Limited font choices.
-- Assets must be placed in the `Content` folder within `bin`.
+- There is no option for making the window resizable at runtime. 
 
 ## References
 - [MonoGame](https://monogame.net)

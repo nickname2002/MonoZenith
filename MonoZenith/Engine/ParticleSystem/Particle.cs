@@ -16,7 +16,15 @@ public class Particle
     public float Lifespan { get; set; }
     private float _startingLifespan;
 
-    public Particle(Random r, Game g, Texture2D texture, Vector2 position, Vector2 velocity, Color color, int size, float lifespan)
+    public Particle(
+        Random r, 
+        MonoZenith.Game g, 
+        Texture2D texture, 
+        Vector2 position, 
+        Vector2 velocity, 
+        Color color, 
+        int size, 
+        float lifespan)
     {
         _game = g;
         _texture = texture;
