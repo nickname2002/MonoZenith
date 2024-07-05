@@ -8,8 +8,11 @@ namespace MonoZenith;
 
 public class TimerManager
 {
-    private List<Timer> _timers;
+    private static List<Timer> _timers;
+    private TimerManager _instance;
     
+    public TimerManager Instance => _instance ??= new TimerManager();
+
     public TimerManager()
     {
         _timers = new List<Timer>();
@@ -19,7 +22,7 @@ public class TimerManager
     /// Update all timers in the buffer.
     /// </summary>
     /// <param name="gameTime">Game time.</param>
-    public void Update(GameTime gameTime)
+    public static void Update(GameTime gameTime)
     {
         foreach (var t in _timers.Where(t => t != null))
         {
@@ -32,7 +35,7 @@ public class TimerManager
     /// </summary>
     /// <param name="index">Index of the timer in the buffer.</param>
     /// <param name="milliSeconds">Amount of milliseconds the timer is active.</param>
-    public void CreateTimer(int index, int milliSeconds)
+    public static void CreateTimer(int index, int milliSeconds)
     {
         try
         {
@@ -49,7 +52,7 @@ public class TimerManager
     /// </summary>
     /// <param name="index">Index of the timer in the buffer.</param>
     /// <returns>Whether timer at the index in the buffer is over.</returns>
-    public bool TimerOver(int index)
+    public static bool TimerOver(int index)
     {
         return _timers[index].TimerOver();
     }
@@ -58,7 +61,7 @@ public class TimerManager
     /// Resets the timer at the index in the buffer.
     /// </summary>
     /// <param name="index">The index of the timer in the buffer.</param>
-    public void ResetTimer(int index)
+    public static void ResetTimer(int index)
     {
         _timers[index].ResetTimer();
     }
@@ -66,7 +69,7 @@ public class TimerManager
     /// <summary>
     /// Remove all timers from the buffer.
     /// </summary>
-    public void ClearTimers()
+    public static void ClearTimers()
     {
         _timers.Clear();
     }
