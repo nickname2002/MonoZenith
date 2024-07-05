@@ -101,7 +101,7 @@ public class GameFacade
         return mouseSate.ScrollWheelValue;
     }
     
-    public SpriteFont LoadFont(string filePath, int scale)
+    public SpriteFont LoadFont(string filePath, float scale)
     {
         string rootPath = Environment.CurrentDirectory;
         string correctedPath = $"{rootPath}/Content/" + filePath;
