@@ -75,7 +75,8 @@ namespace MonoZenith.Engine
 
             _gameFacade.ControllerConnected = true;
 
-            Dictionary<Func<GamePadCapabilities, bool>, Action> capabilityMappings = new Dictionary<Func<GamePadCapabilities, bool>, Action>
+            Dictionary<Func<GamePadCapabilities, bool>, Action> capabilityMappings = 
+                new Dictionary<Func<GamePadCapabilities, bool>, Action>
             {
                 { cap => cap.HasLeftXThumbStick, () => _gameFacade.HasLeftStick = true },
                 { cap => cap.HasRightXThumbStick, () => _gameFacade.HasRightStick = true },
@@ -131,18 +132,26 @@ namespace MonoZenith.Engine
         /// <param name="gameTime"></param>
         protected override void Update(GameTime gameTime)
         {
+            // Change window size accordingly when resizing
+            if (Window.ClientBounds.Width != _game.ScreenWidth || Window.ClientBounds.Height != _game.ScreenHeight)
+            {
+                _game.SetScreenSize(Window.ClientBounds.Width, Window.ClientBounds.Height);
+            }
+            
+            // If splash screen is still showing, wait
             if (_splashScreenTimer > 0)
             {
                 _splashScreenTimer -= gameTime.ElapsedGameTime.Milliseconds;
                 return;
             }
-            
+
+            // Exit game
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed
                 || Keyboard.GetState().IsKeyDown(Keys.Escape))
             {
                 Exit();
             }
-            
+
             HandleControllerSupport();
             TimerManager.Update(gameTime);
             _game.Update(gameTime);
