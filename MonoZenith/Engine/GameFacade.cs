@@ -14,6 +14,8 @@ public class GameFacade
 {
     private Color _backgroundColor;
     private (int, int) _screenDimensions;
+    private bool _screenResizable;
+    private bool _screenFullScreen;
     private string _windowTitle;
     private readonly SpriteBatch _spriteBatch;
     private readonly GraphicsDeviceManager _graphicsDeviceManager;
@@ -22,6 +24,8 @@ public class GameFacade
     public Color BackgroundColor => this._backgroundColor;
     public int ScreenWidth => this._screenDimensions.Item1;
     public int ScreenHeight => this._screenDimensions.Item2;
+    public bool ScreenResizable => this._screenResizable;
+    public bool ScreenFullScreen => this._screenFullScreen;
     public string WindowTitle => this._windowTitle;
     
     public bool ControllerConnected { get; set; }
@@ -45,6 +49,8 @@ public class GameFacade
         this._spriteBatch = s;
         this._graphicsDeviceManager = g;
         this._screenDimensions = (300, 300);
+        this._screenResizable = false;
+        this._screenFullScreen = false;
         this._windowTitle = "MonoZenith";
         this._content = content;
     }
@@ -66,6 +72,24 @@ public class GameFacade
     public void SetScreenSize(int w, int h)
     {
         this._screenDimensions = (w, h);
+    }
+    
+    /// <summary>
+    /// Set whether the screen is resizable.
+    /// </summary>
+    /// <param name="resizable">Whether the screen is resizable.</param>
+    public void SetScreenResizable(bool resizable)
+    {
+        this._screenResizable = resizable;
+    }
+    
+    /// <summary>
+    /// Set whether the screen is full screen.
+    /// </summary>
+    /// <param name="fullScreen">Whether the screen is full screen.</param>
+    public void SetScreenFullScreen(bool fullScreen)
+    {
+        this._screenFullScreen = fullScreen;
     }
     
     /// <summary>

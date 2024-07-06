@@ -41,9 +41,18 @@ namespace MonoZenith.Engine
         protected override void LoadContent()
         {
             _game.Init();
+            Window.AllowUserResizing = _game.ScreenResizable;
 
+            // If full screen, set window size to screen size
+            if (_game.ScreenFullScreen)
+            {
+                _game.SetScreenSize(
+                    GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width,
+                    GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height);
+            }
+            
             // Change window properties
-            _graphics.IsFullScreen = false;
+            _graphics.IsFullScreen = _game.ScreenFullScreen;
             _graphics.PreferredBackBufferWidth = _game.ScreenWidth;
             _graphics.PreferredBackBufferHeight = _game.ScreenHeight;
             _graphics.ApplyChanges();
