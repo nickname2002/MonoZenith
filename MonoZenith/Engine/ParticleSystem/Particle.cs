@@ -37,6 +37,10 @@ public class Particle
         _startingLifespan = lifespan;
     }
     
+    /// <summary>
+    /// Update the particle.
+    /// </summary>
+    /// <param name="gameTime"></param>
     public virtual void Update(GameTime gameTime)
     {
         Vector2 velocity = Velocity;
@@ -46,6 +50,9 @@ public class Particle
         UpdateTransparencyOverLifeTime();
     }
 
+    /// <summary>
+    /// Update the transparency of the particle over its lifetime.
+    /// </summary>
     protected void UpdateTransparencyOverLifeTime()
     {
         Color = new Color(
@@ -55,6 +62,9 @@ public class Particle
             Lifespan / _startingLifespan);    
     }
     
+    /// <summary>
+    /// Draw the particle.
+    /// </summary>
     public void Draw()
     {
         if (_texture == null)
