@@ -17,6 +17,8 @@ public partial class Game
     public Color BackgroundColor => _facade.BackgroundColor;
     public int ScreenWidth => _facade.ScreenWidth;
     public int ScreenHeight => _facade.ScreenHeight;
+    public bool ScreenResizable => _facade.ScreenResizable;
+    public bool ScreenFullScreen => _facade.ScreenFullScreen;
     public string WindowTitle => _facade.WindowTitle;
     
     public bool ControllerConnected => _facade.ControllerConnected;
@@ -130,6 +132,24 @@ public partial class Game
     public void SetScreenSize(int w, int h)
     {
         _facade.SetScreenSize(w, h);
+    }
+    
+    /// <summary>
+    /// Set the screen full screen.
+    /// </summary>
+    /// <param name="fullScreen">Whether the screen is full screen.</param>
+    public void SetScreenFullScreen(bool fullScreen)
+    {
+        _facade.SetScreenFullScreen(fullScreen);
+    }
+    
+    /// <summary>
+    /// Set the screen resizable.
+    /// </summary>
+    /// <param name="resizable">Whether the screen is resizable.</param>
+    public void SetScreenResizable(bool resizable)
+    {
+        _facade.SetScreenResizable(resizable);
     }
 
     /// <summary>

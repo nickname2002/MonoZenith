@@ -11,7 +11,7 @@ public partial class Game
     /* Initialize game vars and load assets. */
     public void Init()
     {
-        
+        SetScreenResizable(true);
     }
 
     /* Update game logic. */
