@@ -7,13 +7,11 @@ public class Timer
 {
     public readonly int OriginalMilliSeconds;
     private int _milliSeconds;
-    private int _index;
     
-    public Timer(int milliSeconds, int index)
+    public Timer(int milliSeconds)
     {
         OriginalMilliSeconds = milliSeconds;
         _milliSeconds = milliSeconds;
-        _index = index;
     }
 
     /// <summary>
