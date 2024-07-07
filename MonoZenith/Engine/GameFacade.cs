@@ -186,9 +186,8 @@ public class GameFacade
     /// <param name="angle">Rotational angle</param>
     public void DrawText(string content, Vector2 pos, SpriteFont font, Color c, float scale=1, float angle=0)
     {
-        Vector2 origin = font.MeasureString(content) / 2;
         float rotationAngle = MathHelper.ToRadians(angle);
-        _spriteBatch.DrawString(font, content, pos, c, rotationAngle, origin, scale, SpriteEffects.None, 0);
+        _spriteBatch.DrawString(font, content, pos, c, rotationAngle, pos, scale, SpriteEffects.None, 0);
     }
     
     /* Source: https://community.monogame.net/t/loading-png-jpg-etc-directly/7403 */
@@ -226,9 +225,6 @@ public class GameFacade
     {
         float rotationAngle = MathHelper.ToRadians(angle);
     
-        // ReSharper disable PossibleLossOfFraction
-        Vector2 origin = new Vector2(texture.Width / 2, texture.Height / 2);
-    
         // Flip image if needed
         var effect = SpriteEffects.None;
         if (flipped)
@@ -240,7 +236,7 @@ public class GameFacade
             null, 
             new Color(Color.White, alpha), 
             rotationAngle, 
-            origin, scale, 
+            pos, scale, 
             effect, 0);
     }
     
@@ -255,7 +251,7 @@ public class GameFacade
     {
         Texture2D pixel = new Texture2D(_graphicsDeviceManager.GraphicsDevice, 1, 1);
         pixel.SetData(new[] { Color.White });
-        Rectangle rect = new Rectangle((int)pos.X - width / 2, (int)pos.Y - height / 2, width, height);
+        Rectangle rect = new Rectangle((int)pos.X, (int)pos.Y, width, height);
         _spriteBatch.Draw(pixel, rect, color);
     }
 
