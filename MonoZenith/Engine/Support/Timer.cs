@@ -7,25 +7,23 @@ public class Timer
 {
     public readonly int OriginalMilliSeconds;
     private int _milliSeconds;
-    private int _index;
     
-    public Timer(int milliSeconds, int index)
+    public Timer(int milliSeconds)
     {
         OriginalMilliSeconds = milliSeconds;
         _milliSeconds = milliSeconds;
-        _index = index;
     }
 
     /// <summary>
     /// Update the timer.
     /// </summary>
-    /// <param name="gameTime">The game time.</param>
-    public void Update(GameTime gameTime)
+    /// <param name="deltaTime">The game time.</param>
+    public void Update(GameTime deltaTime)
     {
         if (_milliSeconds <= 0)
             return;
         
-        _milliSeconds -= gameTime.ElapsedGameTime.Milliseconds;
+        _milliSeconds -= deltaTime.ElapsedGameTime.Milliseconds;
     }
     
     /// <summary>
