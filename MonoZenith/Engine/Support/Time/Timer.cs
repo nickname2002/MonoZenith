@@ -19,13 +19,13 @@ public class Timer
     /// <summary>
     /// Update the timer.
     /// </summary>
-    /// <param name="gameTime">The game time.</param>
-    public void Update(GameTime gameTime)
+    /// <param name="deltaTime">The game time.</param>
+    public void Update(GameTime deltaTime)
     {
         if (_milliSeconds <= 0)
             return;
         
-        _milliSeconds -= gameTime.ElapsedGameTime.Milliseconds;
+        _milliSeconds -= deltaTime.ElapsedGameTime.Milliseconds;
     }
     
     /// <summary>

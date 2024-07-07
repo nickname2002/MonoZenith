@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -60,7 +59,6 @@ namespace MonoZenith.Engine
             
             // Load content
             DataManager.GetInstance(_game);
-            TimerManager.GetInstance();
         }
 
         /// <summary>
@@ -162,7 +160,6 @@ namespace MonoZenith.Engine
             }
 
             HandleControllerSupport();
-            TimerManager.Update(gameTime);
             _game.Update(gameTime);
             base.Update(gameTime);
         }
