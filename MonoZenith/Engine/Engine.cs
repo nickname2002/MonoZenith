@@ -116,14 +116,23 @@ namespace MonoZenith.Engine
                 alpha = 1 - (_splashScreenTimer - 2000) / 1000;
             }
             
+            // Calculate splash screen position
+            float x = _game.ScreenWidth / 2;
+            float y = _game.ScreenHeight / 2;
+            
             // Draw splash screen
-            _game.DrawImage(
+            _spriteBatch.Draw(
                 splashScreen, 
-                new Vector2(_game.ScreenWidth / 2, _game.ScreenHeight / 2),
-                scale,
+                new Vector2(x, y), 
+                null, 
+                new Color(Color.White, alpha), 
                 0, 
-                false, 
-                alpha);
+                new Vector2(
+                    splashScreen.Width / 2, 
+                    splashScreen.Height / 2),
+                scale,
+                SpriteEffects.None,
+                0);
         }
         
         /// <summary>
