@@ -236,7 +236,7 @@ public class GameFacade
             null, 
             new Color(Color.White, alpha), 
             rotationAngle, 
-            pos, scale, 
+            Vector2.Zero, scale, 
             effect, 0);
     }
     
