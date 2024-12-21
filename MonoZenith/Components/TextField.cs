@@ -215,7 +215,7 @@ public class TextField : Component
             Game.DrawText(
                 Content + "|",
                 Position,
-                DataManager.GetInstance(_game).ComponentFont,
+                DataManager.GetInstance().ComponentFont,
                 ContentColor, 
                 _fontScale);
         }
@@ -224,7 +224,7 @@ public class TextField : Component
             Game.DrawText(
                 Content, 
                 Position,
-                DataManager.GetInstance(_game).ComponentFont, 
+                DataManager.GetInstance().ComponentFont, 
                 ContentColor, 
                 _fontScale);
         }

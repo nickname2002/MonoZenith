@@ -23,10 +23,6 @@ public partial class Game
     /* Draw objects/backdrop. */
     public static void Draw()
     {
-        DrawRectangle(
-            Color.Red,
-            new Vector2(0, 0),
-            ScreenWidth / 2,
-            ScreenHeight / 2);
+        
     }
 }

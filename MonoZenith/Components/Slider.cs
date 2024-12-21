@@ -39,7 +39,7 @@ public class Slider : Component
         TextColor = Color.Black;
         
         _sliding = false;
-        _font = DataManager.GetInstance(g).ComponentFont;
+        _font = DataManager.GetInstance().ComponentFont;
     }
 
     /* Check if mouse is hovering over slider. */

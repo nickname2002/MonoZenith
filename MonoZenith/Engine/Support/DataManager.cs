@@ -1,11 +1,10 @@
-
 using Microsoft.Xna.Framework.Graphics;
+using static MonoZenith.Game;
 
 namespace MonoZenith.Engine.Support
 {
     public class DataManager
     {
-        private readonly Game _game;
         private static DataManager _instance;
         
         // Fonts
@@ -16,20 +15,33 @@ namespace MonoZenith.Engine.Support
         
         // Audio
 
-        private DataManager(Game game)
+        private DataManager()
         {
-            _game = game;
             LoadData();
         }
 
         /// <summary>
         /// Get the instance of the DataManager.
         /// </summary>
-        /// <param name="game">The game instance.</param>
         /// <returns>The DataManager instance.</returns>
-        public static DataManager GetInstance(Game game)
+        public static DataManager GetInstance()
         {
-            return _instance ??= new DataManager(game);
+            return _instance ??= new DataManager();
+        }
+
+        private void LoadFonts()
+        {
+            ComponentFont = LoadFont("Fonts/pixel.ttf", 1);
+        }
+        
+        private void LoadTextures()
+        {
+            MonoZenithLogo = LoadImage("Images/monozenith.png");
+        }
+        
+        private void LoadSoundEffects()
+        {
+            
         }
         
         /// <summary>
@@ -37,13 +49,9 @@ namespace MonoZenith.Engine.Support
         /// </summary>
         private void LoadData()
         {
-            // Load fonts
-            ComponentFont = Game.LoadFont("Fonts/pixel.ttf", 1);
-            
-            // Load textures
-            MonoZenithLogo = Game.LoadImage("Images/monozenith.png");
-            
-            // Load audio
+            LoadFonts();
+            LoadTextures();
+            LoadSoundEffects();
         }
     }
 }

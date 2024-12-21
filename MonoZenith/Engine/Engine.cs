@@ -58,7 +58,7 @@ namespace MonoZenith.Engine
             Window.Title = WindowTitle;
             
             // Load content
-            DataManager.GetInstance(Instance);
+            DataManager.GetInstance();
         }
 
         /// <summary>
@@ -103,7 +103,7 @@ namespace MonoZenith.Engine
         /// </summary>
         private void ShowSplashScreen()
         {
-            Texture2D splashScreen = DataManager.GetInstance(Instance).MonoZenithLogo;
+            Texture2D splashScreen = DataManager.GetInstance().MonoZenithLogo;
             float scale = (float)ScreenWidth / splashScreen.Width * 0.6f;
             scale += (1 - _splashScreenTimer / 3000) / 10;
             

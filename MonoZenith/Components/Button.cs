@@ -44,7 +44,7 @@ public class Button : Component
         _buttonColor = buttonColor;
         _originalButtonColor = _buttonColor;
         _buttonHoverColor = new Color(buttonColor.R + 50, buttonColor.G + 50, buttonColor.B + 50);
-        _font = DataManager.GetInstance(g).ComponentFont;
+        _font = DataManager.GetInstance().ComponentFont;
         _callbackMethod = () => Game.DebugLog("");
         
         // Border properties 
