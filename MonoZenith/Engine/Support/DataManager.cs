@@ -38,10 +38,10 @@ namespace MonoZenith.Engine.Support
         private void LoadData()
         {
             // Load fonts
-            ComponentFont = _game.LoadFont("Fonts/pixel.ttf", 1);
+            ComponentFont = Game.LoadFont("Fonts/pixel.ttf", 1);
             
             // Load textures
-            MonoZenithLogo = _game.LoadImage("Images/monozenith.png");
+            MonoZenithLogo = Game.LoadImage("Images/monozenith.png");
             
             // Load audio
         }

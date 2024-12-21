@@ -9,20 +9,24 @@ namespace MonoZenith;
 public partial class Game
 {
     /* Initialize game vars and load assets. */
-    public void Init()
+    public static void Init()
     {
         
     }
 
     /* Update game logic. */
-    public void Update(GameTime deltaTime)
+    public static void Update(GameTime deltaTime)
     {
 
     }
     
     /* Draw objects/backdrop. */
-    public void Draw()
+    public static void Draw()
     {
-    
+        DrawRectangle(
+            Color.Red,
+            new Vector2(0, 0),
+            ScreenWidth / 2,
+            ScreenHeight / 2);
     }
 }

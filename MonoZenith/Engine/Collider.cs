@@ -43,6 +43,6 @@ public class Collider
     /// </summary>
     public void Draw()
     {
-        _game.DrawRectangle(Color.Red, _position, Width, Height);
+        Game.DrawRectangle(Color.Red, _position, Width, Height);
     }
 }

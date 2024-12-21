@@ -18,7 +18,7 @@ public class Particle
 
     public Particle(
         Random r, 
-        MonoZenith.Game g, 
+        Game g, 
         Texture2D texture, 
         Vector2 position, 
         Vector2 velocity, 
@@ -69,7 +69,7 @@ public class Particle
     {
         if (_texture == null)
         {
-            _game.DrawRectangle(
+            Game.DrawRectangle(
                 Color, 
                 Position, 
                 Size, 
@@ -77,6 +77,6 @@ public class Particle
             return;
         }
         
-        _game.DrawImage(_texture, Position);
+        Game.DrawImage(_texture, Position);
     }
 }

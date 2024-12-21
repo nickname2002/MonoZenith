@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MonoZenith.Engine.Support;
+using static MonoZenith.Game;
 
 namespace MonoZenith.Engine
 {
@@ -13,7 +14,6 @@ namespace MonoZenith.Engine
         private readonly GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private GameFacade _gameFacade;
-        private Game _game;
         private float _splashScreenTimer = 3000;
 
         public Engine()
@@ -30,7 +30,7 @@ namespace MonoZenith.Engine
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             _gameFacade = new GameFacade(_spriteBatch, _graphics, Content);
-            _game = new Game(_gameFacade);
+            Game.Initialize(_gameFacade);
             base.Initialize();
         }
 
@@ -39,26 +39,26 @@ namespace MonoZenith.Engine
         /// </summary>
         protected override void LoadContent()
         {
-            _game.Init();
-            Window.AllowUserResizing = _game.ScreenResizable;
+            Init();
+            Window.AllowUserResizing = ScreenResizable;
 
             // If full screen, set window size to screen size
-            if (_game.ScreenFullScreen)
+            if (ScreenFullScreen)
             {
-                _game.SetScreenSize(
+                SetScreenSize(
                     GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width,
                     GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height);
             }
             
             // Change window properties
-            _graphics.IsFullScreen = _game.ScreenFullScreen;
-            _graphics.PreferredBackBufferWidth = _game.ScreenWidth;
-            _graphics.PreferredBackBufferHeight = _game.ScreenHeight;
+            _graphics.IsFullScreen = ScreenFullScreen;
+            _graphics.PreferredBackBufferWidth = ScreenWidth;
+            _graphics.PreferredBackBufferHeight = ScreenHeight;
             _graphics.ApplyChanges();
-            Window.Title = _game.WindowTitle;
+            Window.Title = WindowTitle;
             
             // Load content
-            DataManager.GetInstance(_game);
+            DataManager.GetInstance(Instance);
         }
 
         /// <summary>
@@ -103,8 +103,8 @@ namespace MonoZenith.Engine
         /// </summary>
         private void ShowSplashScreen()
         {
-            Texture2D splashScreen = DataManager.GetInstance(_game).MonoZenithLogo;
-            float scale = (float)_game.ScreenWidth / splashScreen.Width * 0.6f;
+            Texture2D splashScreen = DataManager.GetInstance(Instance).MonoZenithLogo;
+            float scale = (float)ScreenWidth / splashScreen.Width * 0.6f;
             scale += (1 - _splashScreenTimer / 3000) / 10;
             
             // Fade in slowly
@@ -115,8 +115,8 @@ namespace MonoZenith.Engine
             }
             
             // Calculate splash screen position
-            float x = _game.ScreenWidth / 2;
-            float y = _game.ScreenHeight / 2;
+            float x = ScreenWidth / 2f;
+            float y = ScreenHeight / 2f;
             
             // Draw splash screen
             _spriteBatch.Draw(
@@ -126,8 +126,8 @@ namespace MonoZenith.Engine
                 new Color(Color.White, alpha), 
                 0, 
                 new Vector2(
-                    splashScreen.Width / 2, 
-                    splashScreen.Height / 2),
+                    splashScreen.Width / 2f, 
+                    splashScreen.Height / 2f),
                 scale,
                 SpriteEffects.None,
                 0);
@@ -140,9 +140,9 @@ namespace MonoZenith.Engine
         protected override void Update(GameTime gameTime)
         {
             // Change window size accordingly when resizing
-            if (Window.ClientBounds.Width != _game.ScreenWidth || Window.ClientBounds.Height != _game.ScreenHeight)
+            if (Window.ClientBounds.Width != ScreenWidth || Window.ClientBounds.Height != ScreenHeight)
             {
-                _game.SetScreenSize(Window.ClientBounds.Width, Window.ClientBounds.Height);
+                SetScreenSize(Window.ClientBounds.Width, Window.ClientBounds.Height);
             }
             
             // If splash screen is still showing, wait
@@ -160,7 +160,7 @@ namespace MonoZenith.Engine
             }
 
             HandleControllerSupport();
-            _game.Update(gameTime);
+            MonoZenith.Game.Update(gameTime);
             base.Update(gameTime);
         }
 
@@ -170,7 +170,7 @@ namespace MonoZenith.Engine
         /// <param name="gameTime">Game time.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(_splashScreenTimer > 0 ? Color.White : _game.BackgroundColor);
+            GraphicsDevice.Clear(_splashScreenTimer > 0 ? Color.White : BackgroundColor);
             _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
             
             if (_splashScreenTimer > 0)
@@ -180,7 +180,7 @@ namespace MonoZenith.Engine
                 return;
             }
             
-            _game.Draw();
+            MonoZenith.Game.Draw();
             _spriteBatch.End();
             base.Draw(gameTime);
         }

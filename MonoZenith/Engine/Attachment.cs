@@ -12,28 +12,29 @@ public enum MouseButtons { Left, Middle, Right }
 
 public partial class Game
 {
-    private readonly GameFacade _facade;
+    private static GameFacade _facade;
+    public static Game Instance { get; private set; }
 
-    public Color BackgroundColor => _facade.BackgroundColor;
-    public int ScreenWidth => _facade.ScreenWidth;
-    public int ScreenHeight => _facade.ScreenHeight;
-    public bool ScreenResizable => _facade.ScreenResizable;
-    public bool ScreenFullScreen => _facade.ScreenFullScreen;
-    public string WindowTitle => _facade.WindowTitle;
+    public static Color BackgroundColor => _facade.BackgroundColor;
+    public static int ScreenWidth => _facade.ScreenWidth;
+    public static int ScreenHeight => _facade.ScreenHeight;
+    public static bool ScreenResizable => _facade.ScreenResizable;
+    public static bool ScreenFullScreen => _facade.ScreenFullScreen;
+    public static string WindowTitle => _facade.WindowTitle;
     
-    public bool ControllerConnected => _facade.ControllerConnected;
-    public bool HasLeftStick => _facade.HasLeftStick;
-    public bool HasRightStick => _facade.HasRightStick;
-    public bool HasDPad => _facade.HasDPad;
-    public bool HasLeftTrigger => _facade.HasLeftTrigger;
-    public bool HasRightTrigger => _facade.HasRightTrigger;
-    public bool HasLeftBumper => _facade.HasLeftBumper;
-    public bool HasRightBumper => _facade.HasRightBumper;
-    public bool HasAButton => _facade.HasAButton;
-    public bool HasBButton => _facade.HasBButton;
-    public bool HasXButton => _facade.HasXButton;
-    public bool HasYButton => _facade.HasYButton;
-    
+    public static bool ControllerConnected => _facade.ControllerConnected;
+    public static bool HasLeftStick => _facade.HasLeftStick;
+    public static bool HasRightStick => _facade.HasRightStick;
+    public static bool HasDPad => _facade.HasDPad;
+    public static bool HasLeftTrigger => _facade.HasLeftTrigger;
+    public static bool HasRightTrigger => _facade.HasRightTrigger;
+    public static bool HasLeftBumper => _facade.HasLeftBumper;
+    public static bool HasRightBumper => _facade.HasRightBumper;
+    public static bool HasAButton => _facade.HasAButton;
+    public static bool HasBButton => _facade.HasBButton;
+    public static bool HasXButton => _facade.HasXButton;
+    public static bool HasYButton => _facade.HasYButton;
+
     // PlayStation DualSense buttons
     public enum DualSenseButtons
     {
@@ -101,53 +102,54 @@ public partial class Game
         Right = Buttons.DPadRight
     }
     
-    public Game(GameFacade f)
+    public static void Initialize(GameFacade f)
     {
-        _facade = f;
+        _facade = f ?? throw new ArgumentNullException(nameof(f), "GameFacade cannot be null.");
+        Instance = new Game();
     }
 
     /// <summary>
     /// Log a message to the console.
     /// </summary>
-    /// <param name="msg">Message</param>
-    public void DebugLog(string msg)
+    /// <param name="msg">The message to log.</param>
+    public static void DebugLog(string msg)
     {
         Console.WriteLine(msg);
     }
-    
+
     /// <summary>
-    /// Set the background color.
+    /// Set the background color of the game.
     /// </summary>
-    /// <param name="c">Color</param>
-    public void SetBackgroundColor(Color c)
+    /// <param name="c">The color to set.</param>
+    public static void SetBackgroundColor(Color c)
     {
         _facade.SetBackgroundColor(c);
     }
-    
+
     /// <summary>
-    /// Set the screen size.
+    /// Set the size of the screen.
     /// </summary>
-    /// <param name="w">Width</param>
-    /// <param name="h">Height</param>
-    public void SetScreenSize(int w, int h)
+    /// <param name="w">Width of the screen.</param>
+    /// <param name="h">Height of the screen.</param>
+    public static void SetScreenSize(int w, int h)
     {
         _facade.SetScreenSize(w, h);
     }
-    
+
     /// <summary>
-    /// Set the screen full screen.
+    /// Set the screen to full screen or not.
     /// </summary>
     /// <param name="fullScreen">Whether the screen is full screen.</param>
-    public void SetScreenFullScreen(bool fullScreen)
+    public static void SetScreenFullScreen(bool fullScreen)
     {
         _facade.SetScreenFullScreen(fullScreen);
     }
-    
+
     /// <summary>
-    /// Set the screen resizable.
+    /// Set whether the screen is resizable.
     /// </summary>
     /// <param name="resizable">Whether the screen is resizable.</param>
-    public void SetScreenResizable(bool resizable)
+    public static void SetScreenResizable(bool resizable)
     {
         _facade.SetScreenResizable(resizable);
     }
@@ -156,27 +158,27 @@ public partial class Game
     /// Set the window title.
     /// </summary>
     /// <param name="t">The window title.</param>
-    public void SetWindowTitle(string t)
+    public static void SetWindowTitle(string t)
     {
         _facade.SetWindowTitle(t);
     }
 
     /// <summary>
-    /// Get whether a keyboard key is pressed.
+    /// Check if a key is pressed.
     /// </summary>
-    /// <param name="key">The key that is checked.</param>
-    /// <returns>Whether the provided key is pressed.</returns>
-    public bool GetKeyDown(Keys key)
+    /// <param name="key">The key to check.</param>
+    /// <returns>Whether the key is pressed.</returns>
+    public static bool GetKeyDown(Keys key)
     {
         return _facade.GetKeyDown(key);
     }
 
     /// <summary>
-    /// Get whether a mouse button is pressed.
+    /// Check if a mouse button is pressed.
     /// </summary>
-    /// <param name="button">The button that is checked.</param>
-    /// <returns>Whether a mouse button is pressed.</returns>
-    public bool GetMouseButtonDown(MouseButtons button)
+    /// <param name="button">The mouse button to check.</param>
+    /// <returns>Whether the mouse button is pressed.</returns>
+    public static bool GetMouseButtonDown(MouseButtons button)
     {
         return _facade.GetMouseButtonDown(button);
     }
@@ -184,17 +186,17 @@ public partial class Game
     /// <summary>
     /// Get the mouse position.
     /// </summary>
-    /// <returns>Position of the mouse pointer.</returns>
-    public Point GetMousePosition()
+    /// <returns>The mouse position.</returns>
+    public static Point GetMousePosition()
     {
         return _facade.GetMousePosition();
     }
 
     /// <summary>
-    /// Get the mouse wheel value.
+    /// Get the value of the mouse wheel.
     /// </summary>
     /// <returns>The value of the mouse wheel.</returns>
-    public int GetMouseWheelValue()
+    public static int GetMouseWheelValue()
     {
         return _facade.GetMouseWheelValue();
     }
@@ -202,10 +204,10 @@ public partial class Game
     /// <summary>
     /// Load a font.
     /// </summary>
-    /// <param name="font">Name of the font to be loaded.</param>
-    /// <param name="scale">Scale of the font.</param>
-    /// <returns>The SpriteFont of the requested font.</returns>
-    public SpriteFont LoadFont(string font, float scale)
+    /// <param name="font">The font to load.</param>
+    /// <param name="scale">The scale of the font.</param>
+    /// <returns>The loaded font.</returns>
+    public static SpriteFont LoadFont(string font, float scale)
     {
         return _facade.LoadFont(font, scale);
     }
@@ -213,72 +215,67 @@ public partial class Game
     /// <summary>
     /// Draw text to the screen.
     /// </summary>
-    /// <param name="content">Content</param>
-    /// <param name="pos">Position</param>
-    /// <param name="font">Font</param>
-    /// <param name="c">Color</param>
-    /// <param name="scale">Scale</param>
-    /// <param name="angle">Rotational angle</param>
-    public void DrawText(string content, Vector2 pos, SpriteFont font, Color c, float scale=1, float angle=0)
+    /// <param name="content">The content of the text.</param>
+    /// <param name="pos">The position of the text.</param>
+    /// <param name="font">The font of the text.</param>
+    /// <param name="c">The color of the text.</param>
+    /// <param name="scale">The scale of the text.</param>
+    /// <param name="angle">The angle of the text.</param>
+    public static void DrawText(string content, Vector2 pos, SpriteFont font, Color c, float scale = 1, float angle = 0)
     {
         _facade.DrawText(content, pos, font, c, scale, angle);
     }
 
-    /* Source: https://community.monogame.net/t/loading-png-jpg-etc-directly/7403 */
     /// <summary>
     /// Load an image.
     /// </summary>
-    /// <param name="filepath">Filepath</param>
-    /// <returns>Texture of the requested image.</returns>
-    public Texture2D LoadImage(string filepath)
+    /// <param name="filepath">The file path of the image.</param>
+    /// <returns>The loaded image.</returns>
+    public static Texture2D LoadImage(string filepath)
     {
         return _facade.LoadImage(filepath);
     }
 
-    /* Source: https://www.industrian.net/tutorials/texture2d-and-drawing-sprites/ */
     /// <summary>
     /// Draw an image to the screen.
     /// </summary>
-    /// <param name="texture">Image texture</param>
-    /// <param name="pos">Position</param>
-    /// <param name="scale">Scale</param>
-    /// <param name="angle">Rotational angle</param>
-    /// <param name="flipped">Horizontally flipped</param>
-    /// <param name="alpha">Alpha</param>
-    public void DrawImage(
-        Texture2D texture, 
-        Vector2 pos, 
-        float scale=1, 
-        float angle=0, 
-        bool flipped=false, 
-        float alpha=1.0f)
+    /// <param name="texture">The texture to draw.</param>
+    /// <param name="pos">The position of the image.</param>
+    /// <param name="scale">The scale of the image.</param>
+    /// <param name="angle">The angle of the image.</param>
+    /// <param name="flipped">Whether the image is flipped.</param>
+    /// <param name="alpha">The alpha of the image.</param>
+    public static void DrawImage(Texture2D texture, Vector2 pos, float scale = 1, float angle = 0, bool flipped = false, float alpha = 1.0f)
     {
         _facade.DrawImage(texture, pos, scale, angle, flipped, alpha);
     }
-    
+
     /// <summary>
     /// Draw a rectangle to the screen.
     /// </summary>
-    /// <param name="color">Color</param>
-    /// <param name="pos">Position</param>
-    /// <param name="width">Width</param>
-    /// <param name="height">Height</param>
-    public void DrawRectangle(Color color, Vector2 pos, int width, int height)
+    /// <param name="color">The color of the rectangle.</param>
+    /// <param name="pos">The position of the rectangle.</param>
+    /// <param name="width">The width of the rectangle.</param>
+    /// <param name="height">The height of the rectangle.</param>
+    public static void DrawRectangle(Color color, Vector2 pos, int width, int height)
     {
         _facade.DrawRectangle(color, pos, width, height);
     }
 
     /// <summary>
-    /// Load an audio file.
+    /// Load audio from a file.
     /// </summary>
-    /// <param name="filePath">Filepath to the audio file to be loaded.</param>
-    /// <returns>SoundEffectInstance of the audio file.</returns>
-    public SoundEffectInstance LoadAudio(string filePath)
+    /// <param name="filePath">The file path of the audio.</param>
+    /// <returns>The loaded audio.</returns>
+    public static SoundEffectInstance LoadAudio(string filePath)
     {
         return _facade.LoadAudio(filePath);
     }
 
-    public void LogControllerSupportProperties()
+    /// <summary>
+    /// Play audio.
+    /// </summary>
+    public static void LogControllerSupportProperties()
     {
         DebugLog("===== Controller support properties =====");
         DebugLog($"Controller connected: {ControllerConnected}");
@@ -295,22 +292,22 @@ public partial class Game
         DebugLog($"Has Y button: {HasYButton}");
         DebugLog("========================================");
     }
-    
+
     /// <summary>
-    /// Get the gamepad state.
+    /// Get the game pad state.   
     /// </summary>
-    /// <returns>Gamepad state.</returns>
-    public GamePadState GetGamePadState()
+    /// <returns>The game pad state.</returns>
+    public static GamePadState GetGamePadState()
     {
         return GamePad.GetState(PlayerIndex.One);
     }
 
     /// <summary>
-    /// Log the pressed DualSense buttons.
+    /// Log the pressed DualSense button.
     /// </summary>
-    private void LogPressedDualSenseButton()
+    public static void LogPressedDualSenseButton()
     {
-        foreach (DualSenseButtons button in Enum.GetValues(typeof(DualSenseButtons)))
+        foreach (var  button in Enum.GetValues(typeof(DualSenseButtons)))
         {
             if (GamePad.GetState(PlayerIndex.One).IsButtonDown((Buttons)button))
             {
@@ -320,18 +317,18 @@ public partial class Game
     }
 
     /// <summary>
-    /// Vibrate the controller. 
+    /// Vibrate the controller.
     /// </summary>
-    /// <param name="leftMotor">Left motor in controller</param>
-    /// <param name="rightMotor">Right motor in controller</param>
-    public void VibrateController(float leftMotor, float rightMotor)
+    /// <param name="leftMotor">The left motor.</param>
+    /// <param name="rightMotor">The right motor.</param>
+    public static void VibrateController(float leftMotor, float rightMotor)
     {
         if (!ControllerConnected)
         {
             DebugLog("Controller not connected.");
             return;
         }
-        
+
         GamePad.SetVibration(PlayerIndex.One, leftMotor, rightMotor);
     }
 }
