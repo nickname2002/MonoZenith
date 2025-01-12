@@ -25,6 +25,7 @@ mono_crash.*
 [Rr]elease[Bb]in/
 [Dd]ebug[Rr]elease/
 [Dd]ebug[Rr]elease[Bb]in/
+*.app/
 
 # Ignore .NET Core and .NET 5+ artifacts
 bin/
